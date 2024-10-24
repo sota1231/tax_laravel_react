@@ -24,18 +24,18 @@ class SortingContoroller extends Controller{
 
     // top画面
     public function index(){
-        // $user = Auth::user();
+        $user = Auth::user();
         // TODO:まだ認証機能ないため
-        $user=1;
-        if($user==1){
-            // if($user->role==1){
+        // $user=1;
+        // if($user==1){
+            if($user->role==1){
                 $kari = new KariName();
             $kari_names=$kari->kari();
             // 仕分けのデータを取得してtabelを作成する
 
             // TODO:まだ認証機能ないため
-            // $id = Auth::id();
-            $id =1;
+            $id = Auth::id();
+            // $id =1;
             $sorting = new Sorting();
             $sortings =$sorting->alldata($id); 
             return Inertia::render('view/Index', ['kari_names'=>$kari_names,'sortings'=>$sortings]);
@@ -43,7 +43,7 @@ class SortingContoroller extends Controller{
         //　roleが０なら管理者画面へ遷移 
         }else{
             $users = DB::table('users')->select('*')->selectRaw('DATE_FORMAT(created_at,"%Y-%m-%d") as day') ->paginate(20); 
-            return Inertia::render('view.Kanri',['users'=>$users]);
+            return Inertia::render('view/Manager',['users'=>$users]);
         }
     }
 

@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { useForm } from '@inertiajs/react';
 import HeaderLayout from '@/Layouts/Header.Layout';
+import PrimaryButton from '@/Components/PrimaryButton';
 
 const Index = ({ kari_names, sortings }) => {
     const { data, setData, post, processing, errors } = useForm({
@@ -94,7 +95,10 @@ const Index = ({ kari_names, sortings }) => {
                         </div>
                     </div>
 
-                    <button type="submit" disabled={processing}>送信</button>
+                    {/* <button type="submit" disabled={processing}>送信</button> */}
+                    <PrimaryButton className="ms-4" disabled={processing}>
+                        送信
+                    </PrimaryButton>
                 </form>
             </div>
         </HeaderLayout>
