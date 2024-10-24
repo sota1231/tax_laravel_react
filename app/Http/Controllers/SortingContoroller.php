@@ -25,17 +25,12 @@ class SortingContoroller extends Controller{
     // top画面
     public function index(){
         $user = Auth::user();
-        // TODO:まだ認証機能ないため
-        // $user=1;
-        // if($user==1){
-            if($user->role==1){
-                $kari = new KariName();
+        if($user->role==1){
+            $kari = new KariName();
             $kari_names=$kari->kari();
             // 仕分けのデータを取得してtabelを作成する
 
-            // TODO:まだ認証機能ないため
             $id = Auth::id();
-            // $id =1;
             $sorting = new Sorting();
             $sortings =$sorting->alldata($id); 
             return Inertia::render('view/Index', ['kari_names'=>$kari_names,'sortings'=>$sortings]);
@@ -47,11 +42,11 @@ class SortingContoroller extends Controller{
         }
     }
 
-    // TODO:バリデーションチェック
-    public function store(sortingRequest $request){
+    // 仕分け登録
+    public function store(SortingRequest $request){
         $sorting = new Sorting();
         $sortings =$sorting->register($request); 
-        return Redirect::route('Index');
+        return Redirect::route('index');
     }
 
     // 給料入力画面

@@ -10,6 +10,7 @@ const Index = ({ kari_names, sortings }) => {
         kari_price: '',
         kashi_name: '',
         kashi_price: '',
+        remarks: '',
     });
 
     const handleSubmit = (e) => {
@@ -71,9 +72,9 @@ const Index = ({ kari_names, sortings }) => {
                                 {errors.kashi_name && <dd className="text-danger">{errors.kashi_name}</dd>}
                                 {/* 貸方名のセレクトボックスを追加する必要があります */}
                                 <select
-                                    name="kari_name"
-                                    value={data.kari_name}
-                                    onChange={(e) => setData('kari_name', e.target.value)}
+                                    name="kashi_name"
+                                    value={data.kashi_name}
+                                    onChange={(e) => setData('kashi_name', e.target.value)}
                                 >
                                     {kari_names.map((name, index) => (
                                         <option key={index} value={name.name}>{name.name}</option>
@@ -90,6 +91,20 @@ const Index = ({ kari_names, sortings }) => {
                                     placeholder="1000"
                                     value={data.kashi_price}
                                     onChange={(e) => setData('kashi_price', e.target.value)}
+                                />
+                            </div>
+                        </div>
+                        <div className="">
+
+                            <div className="box py-2">
+                                <label htmlFor="remarks">備考</label><span className="required text-danger">*</span>
+                                {errors.remarks && <dd className="text-danger">{errors.remarks}</dd>}
+                                <input
+                                    type="text"
+                                    name="remarks"
+                                    placeholder="〇月家賃"
+                                    value={data.remarks}
+                                    onChange={(e) => setData('remarks', e.target.value)}
                                 />
                             </div>
                         </div>

@@ -7,6 +7,7 @@
 namespace App\Models\Services;
 
 use Carbon\Carbon;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Support\Facades\DB;
@@ -67,6 +68,7 @@ class Sorting extends Model
     }
 
     public function register($request){
+        $id = Auth::id();
         $param = [
             'kari_name'=>$request->kari_name,
             'kari_price' => $request->kari_price,
@@ -74,7 +76,7 @@ class Sorting extends Model
             'kashi_price'=>$request->kashi_price,
             'remarks'=>$request->remarks,
             'day'=>$request->day,
-            'user_id'=>$request->user_id
+            'user_id'=>$id,
         ];
         DB::insert('insert into sortings (kari_name,kari_price,kashi_name,kashi_price,remarks,day,user_id) 
                     values(:kari_name,:kari_price,:kashi_name,:kashi_price,:remarks,:day,:user_id)',$param);
