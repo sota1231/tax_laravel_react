@@ -25,8 +25,9 @@ class DeductionRequest extends FormRequest
             'day'=>'required',
             'remarks'=>'required',
             'name'=>'required',
+            'role'=>'required',
             'price' => 'required',
-            'user_id'=>'required'
+            // 'user_id'=>'required'
         ];
     }
 
@@ -42,7 +43,7 @@ class DeductionRequest extends FormRequest
             'price.required'=>'この項目は必須項目です。',
             'user_id.required'=>'この項目は必須項目です。',
             'name.required'=>'この項目は必須項目です。',
-
+            'role.required'=>'この項目は必須項目です。',
             'password.required'=>'この項目は必須項目です。',
             'password.confirmed'=>'パスワードが確認用と一致しません。',
             'password.min'=>'パスワードは8文字以上で入力してください',

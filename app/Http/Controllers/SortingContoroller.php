@@ -49,11 +49,25 @@ class SortingContoroller extends Controller{
         return Redirect::route('index');
     }
 
+    // 控除登録画面
+    public function deduction(){
+        $id = Auth::id();
+        $deduction = new Deduction();
+        $deductions = $deduction->alldata($id);
+        return Inertia::render('kino/Deduction',['deductions'=>$deductions]);
+    }
+
+    // 控除登録
+    public function deduction_register(DeductionRequest $request){
+        $deduction = new Deduction();
+        $deductions =$deduction->register($request); 
+        return Redirect::route('deduction');
+    }
+
+    
     // 給料入力画面
     public function kyuyo(){
-        // $id = Auth::id();
-        // TODO:Authの機能を追加する
-        $id =1;
+        $id = Auth::id();
         $kyuyo = new Kyuyo();
         $kyuyos = $kyuyo->alldata($id);
         return Inertia::render('kino/Kyuyo',['kyuyos'=>$kyuyos]);
@@ -67,21 +81,6 @@ class SortingContoroller extends Controller{
     }
 
 
-    // 控除登録画面
-    public function deduction(){
-        // TODO:Authの機能を追加する
-        // $id = Auth::id();
-        $id =1 ;
-        $deduction = new Deduction();
-        $deductions = $deduction->alldata($id);
-        return Inertia::render('kino/Deduction',['deductions'=>$deductions]);
-    }
-
-    public function deduction_register(DeductionRequest $request){
-        $deduction = new Deduction();
-        $deductions =$deduction->register($request); 
-        return Redirect::route('deduction');
-    }
 
     public function tax(){
         // sortingのuser_idとnameが売上げのデータの合計

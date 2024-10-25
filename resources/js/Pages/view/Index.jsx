@@ -115,7 +115,35 @@ const Index = ({ kari_names, sortings }) => {
                         送信
                     </PrimaryButton>
                 </form>
+                <div className="mt-8">
+                    <h3>仕分け一覧</h3>
+                    <table className="table table-striped">
+                        <thead>
+                            <tr>
+                                <th>日付</th>
+                                <th>借方名</th>
+                                <th>借方金額</th>
+                                <th>貸方名</th>
+                                <th>貸方金額</th>
+                                <th>備考</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {sortings.data.map((sorting, index) => (
+                                <tr key={index}>
+                                    <td>{sorting.date}</td>
+                                    <td>{sorting.kari_name}</td>
+                                    <td>{sorting.kari_price}</td>
+                                    <td>{sorting.kashi_name}</td>
+                                    <td>{sorting.kashi_price}</td>
+                                    <td>{sorting.remarks}</td>
+                                </tr>
+                            ))}
+                        </tbody>
+                    </table>
+                </div>
             </div>
+
         </HeaderLayout>
     );
 };

@@ -3,19 +3,19 @@ import { useForm } from '@inertiajs/react';
 import HeaderLayout from '@/Layouts/Header.Layout';
 // import { Inertia } from '@inertiajs/inertia';
 
-const Deduction = () => {
+const Deduction = ({ deductions }) => {
     const { data, setData, post, processing, errors } = useForm({
         user_id: '', // ユーザーIDを適切に設定する必要があります
         day: '',
         name: '',
-        role: '0',
+        role: '',
         price: '',
         remarks: ''
     });
 
     const handleSubmit = (e) => {
         e.preventDefault();
-        post(route('kino/Deduction'));
+        post(route('deduction'));
     };
 
     return (
@@ -84,6 +84,31 @@ const Deduction = () => {
 
                     <button type="submit" disabled={processing}>送信</button>
                 </form>
+                <div className="mt-8">
+                    <h3>控除一覧</h3>
+                    <table className="table table-striped">
+                        <thead>
+                            <tr>
+                                <th>日付</th>
+                                <th>控除名</th>
+                                <th>控除種類</th>
+                                <th>金額</th>
+                                <th>備考</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                        {deductions.data.map((deduction, index) => (
+                            <tr key={index}>
+                                <td>{deduction.day}</td>
+                                <td>{deduction.name}</td>
+                                <td>{deduction.role === 0 ? '通常の控除' : '事業所得控除'}</td>
+                                <td>{deduction.price}</td>
+                                <td>{deduction.remarks}</td>
+                            </tr>
+                            ))}
+                        </tbody>
+                    </table>
+                </div>
             </div>
         </HeaderLayout>
     );

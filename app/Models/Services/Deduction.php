@@ -9,6 +9,7 @@ namespace App\Models\Services;
 use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 
 /**
@@ -65,13 +66,14 @@ class Deduction extends Model
 
     // TODO:遷移先は？　控除
     public function register($request){
+        $id = Auth::id();
         $param = [
             'name'=>$request->name,
             'price' => $request->price,
             'remarks'=>$request->remarks,
             'day'=>$request->day,
             'role'=>$request->role,
-            'user_id'=>$request->user_id
+            'user_id'=>$id
         ];
         DB::insert('insert into deductions (name,price,remarks,day,role,user_id) 
                     values(:name,:price,:remarks,:day,:role,:user_id)',$param);
