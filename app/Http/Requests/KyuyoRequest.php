@@ -26,7 +26,7 @@ class KyuyoRequest extends FormRequest
             'remarks'=>'required',
             'name'=>'required',
             'price' => 'required',
-            'user_id'=>'required'
+            // 'user_id'=>'required'
         ];
     }
 

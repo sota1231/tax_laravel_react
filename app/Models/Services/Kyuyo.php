@@ -9,6 +9,7 @@ namespace App\Models\Services;
 use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 
 /**
@@ -52,14 +53,14 @@ class Kyuyo extends Model
         ->first();
     }
 
-    // TODO:遷移先　給与
     public function register($request){
+        $id = Auth::id();
         $param = [
             'name'=>$request->name,
             'price' => $request->price,
             'remarks'=>$request->remarks,
             'day'=>$request->day,
-            'user_id'=>$request->user_id
+            'user_id'=>$id
         ];
         DB::insert('insert into kyuyos (name,price,remarks,day,user_id) 
                     values(:name,:price,:remarks,:day,:user_id)',$param);

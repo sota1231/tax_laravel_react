@@ -99,7 +99,7 @@ const Deduction = ({ deductions }) => {
                         <tbody>
                         {deductions.data.map((deduction, index) => (
                             <tr key={index}>
-                                <td>{deduction.day}</td>
+                                <td>{deduction.date}</td>
                                 <td>{deduction.name}</td>
                                 <td>{deduction.role === 0 ? '通常の控除' : '事業所得控除'}</td>
                                 <td>{deduction.price}</td>

@@ -64,7 +64,6 @@ class SortingContoroller extends Controller{
         return Redirect::route('deduction');
     }
 
-    
     // 給料入力画面
     public function kyuyo(){
         $id = Auth::id();
@@ -77,7 +76,7 @@ class SortingContoroller extends Controller{
     public function kyuyo_register(KyuyoRequest $request){
         $kyuyo = new Kyuyo();
         $kyuyos =$kyuyo->register($request); 
-        return Inertia::render('kino/Kyuyo');
+        return Redirect::route('kyuyo');
     }
 
 

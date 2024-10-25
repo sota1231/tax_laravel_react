@@ -4,7 +4,7 @@ import { useForm } from '@inertiajs/react';
 import HeaderLayout from '@/Layouts/Header.Layout';
 // import { Inertia } from '@inertiajs/inertia';
 
-const Kyuyo = () => {
+const Kyuyo = ({ kyuyos }) => {
   const { data, setData, post, processing, errors } = useForm({
     user_id: '', // Auth::user()->id に相当する値を設定する必要があります
     day: '',
@@ -75,10 +75,27 @@ const Kyuyo = () => {
           <button className="btn btn-primary my-2" disabled={processing}>登録</button>
         </form>
 
-        {/* 登録済みの仕分けを表示 */}
-        <div className="alldata py-4 my-4">
+        <h3 className="mt-4">給与一覧</h3>
+        <div className="table-responsive">
           <table className="table table-striped">
-            {/* テーブルの内容 */}
+            <thead>
+              <tr>
+                <th>取引日時</th>
+                <th>勤め先</th>
+                <th>手取り金額</th>
+                <th>備考</th>
+              </tr>
+            </thead>
+            <tbody>
+              {kyuyos.data.map((kyuyo, index) => (
+                <tr key={index}>
+                  <td>{kyuyo.date}</td>
+                  <td>{kyuyo.name}</td>
+                  <td>{kyuyo.price}円</td>
+                  <td>{kyuyo.remarks}</td>
+                </tr>
+              ))}
+            </tbody>
           </table>
         </div>
       </div>
