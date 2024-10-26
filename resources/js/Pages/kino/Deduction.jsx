@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { useForm, Link } from '@inertiajs/react';
 import HeaderLayout from '@/Layouts/Header.Layout';
+import FormSelect from '@/Components/FormSelect';
 // import { Inertia } from '@inertiajs/inertia';
 
 const Deduction = ({ deductions }) => {
@@ -60,14 +61,16 @@ const Deduction = ({ deductions }) => {
                                     <label htmlFor="role">控除種類</label><span className="required text-danger">*</span>
                                 </td>
                                 <td>
-                                    <select
-                                        name="role"
-                                        value={data.role}
-                                        onChange={(e) => setData('role', e.target.value)}
-                                    >
-                                        <option value="0">通常の控除（社会保険料控除や扶養控除）</option>
-                                        <option value="1">事業所得控除（青色申告してる方）</option>
-                                    </select>
+                                <FormSelect
+                                    name="role"
+                                    value={data.role}
+                                    onChange={(e) => setData('role', e.target.value)}
+                                    options={[
+                                        { value: "0", label: "通常の控除（社会保険料控除や扶養控除）" },
+                                        { value: "1", label: "事業所得控除（青色申告してる方）" }
+                                    ]}
+                                />
+                                
                                 </td>
                             </tr>
                             <tr>

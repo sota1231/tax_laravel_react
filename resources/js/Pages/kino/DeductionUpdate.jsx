@@ -1,6 +1,8 @@
 import React from 'react';
 import { useForm } from '@inertiajs/react';
 import HeaderLayout from '@/Layouts/Header.Layout';
+import FormSelect from '@/Components/FormSelect';
+
 
 const DeductionUpdate = ({ deductions, errors }) => {
     const { data, setData, post, processing } = useForm({
@@ -25,7 +27,7 @@ const DeductionUpdate = ({ deductions, errors }) => {
                 <form onSubmit={handleSubmit}>
                     <input type="hidden" name="id" value={data.id} />
                     <input type="hidden" name="user_id" value={data.user_id} />
-                    
+
                     <table className="table">
                         <tbody>
                             <tr>
@@ -62,14 +64,15 @@ const DeductionUpdate = ({ deductions, errors }) => {
                                     <label htmlFor="role">控除種類</label><span className="required text-danger">*</span>
                                 </td>
                                 <td>
-                                    <select
+                                    <FormSelect
                                         name="role"
                                         value={data.role}
                                         onChange={(e) => setData('role', e.target.value)}
-                                    >
-                                        <option value="0">通常の控除（社会保険料控除や扶養控除）</option>
-                                        <option value="1">事業所得控除（青色申告してる方）</option>
-                                    </select>
+                                        options={[
+                                            { value: "0", label: "通常の控除（社会保険料控除や扶養控除）" },
+                                            { value: "1", label: "事業所得控除（青色申告してる方）" }
+                                        ]}
+                                    />
                                 </td>
                             </tr>
                             <tr>
@@ -106,7 +109,7 @@ const DeductionUpdate = ({ deductions, errors }) => {
                     </table>
                     <button className="btn btn-success my-2" type="submit" disabled={processing}>編集</button>
                     <button className="btn btn-dark" type="button" onClick={() => window.history.back()}>戻る</button>
-                </form>    
+                </form>
             </div>
         </HeaderLayout>
     );

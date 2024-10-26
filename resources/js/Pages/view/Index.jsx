@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { Link, useForm } from '@inertiajs/react';
 import HeaderLayout from '@/Layouts/Header.Layout';
+import FormSelect from '@/Components/FormSelect';
 import PrimaryButton from '@/Components/PrimaryButton';
 
 const Index = ({ kari_names, sortings }) => {
@@ -23,7 +24,7 @@ const Index = ({ kari_names, sortings }) => {
             <div className="container p-5">
                 <h2>複式簿記</h2>
                 <form onSubmit={handleSubmit}>
-                    
+
                     <table className="table">
                         <tbody>
                             <tr>
@@ -47,30 +48,24 @@ const Index = ({ kari_names, sortings }) => {
                                     {errors.kari_name && <dd className="text-danger">{errors.kari_name}</dd>}
                                 </td>
                                 <td>
-                                    <select
+                                <FormSelect
                                         name="kari_name"
                                         value={data.kari_name}
                                         onChange={(e) => setData('kari_name', e.target.value)}
-                                    >
-                                        {kari_names.map((name, index) => (
-                                            <option key={index} value={name.name}>{name.name}</option>
-                                        ))}
-                                    </select>
+                                        options={kari_names.map(name => ({ value: name.name, label: name.name }))}
+                                    />
                                 </td>
                                 <td>
                                     <label htmlFor="kashi_name">貸方名</label><span className="required text-danger">* </span>
                                     {errors.kashi_name && <dd className="text-danger">{errors.kashi_name}</dd>}
                                 </td>
                                 <td>
-                                    <select
+                                    <FormSelect
                                         name="kashi_name"
                                         value={data.kashi_name}
                                         onChange={(e) => setData('kashi_name', e.target.value)}
-                                    >
-                                        {kari_names.map((name, index) => (
-                                            <option key={index} value={name.name}>{name.name}</option>
-                                        ))}
-                                    </select>
+                                        options={kari_names.map(name => ({ value: name.name, label: name.name }))}
+                                    />
                                 </td>
                             </tr>
                             <tr>
