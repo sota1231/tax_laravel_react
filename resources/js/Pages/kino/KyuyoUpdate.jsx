@@ -18,7 +18,7 @@ const KyuyoUpdate = ({ kyuyos }) => {
     };
 
     return (
-        <HeaderLayout>
+        <HeaderLayout className="bg-success text-bg-success">
             <div className="container p-5">
                 <h2>給与所得編集画面</h2>
 
@@ -26,51 +26,69 @@ const KyuyoUpdate = ({ kyuyos }) => {
                     <input type="hidden" name="id" value={data.id} />
                     <input type="hidden" name="user_id" value={data.user_id} />
                     
-                    <div className="box py-2">
-                        <label htmlFor="day">取引日時</label><span className="required text-danger">*</span>
-                        {errors.day && <dd className="text-danger error">{errors.day}</dd>}
-                        <input
-                            type="date"
-                            name="day"
-                            id="day"
-                            value={data.day}
-                            onChange={e => setData('day', e.target.value)}
-                        />
-                    </div>
-
-                    <div className="box">
-                        <label htmlFor="name">勤め先</label><span className="text-danger required">*</span>
-                        {errors.name && <dd className="text-danger error">{errors.name}</dd>}
-                        <input
-                            type="text"
-                            name="name"
-                            value={data.name}
-                            onChange={e => setData('name', e.target.value)}
-                        />
-                    </div>
-
-                    <div className="box py-2">
-                        <label htmlFor="price">手取り金額</label><span className="text-danger required">*</span>
-                        {errors.price && <dd className="text-danger error">{errors.price}</dd>}
-                        <input
-                            type="number"
-                            name="price"
-                            placeholder="1000"
-                            value={data.price}
-                            onChange={e => setData('price', e.target.value)}
-                        />
-                    </div>
-
-                    <div className="box py-2">
-                        <label htmlFor="remarks">備考</label><span className="text-danger required">*</span>
-                        {errors.remarks && <dd className="text-danger error">{errors.remarks}</dd>}
-                        <input
-                            type="text"
-                            name="remarks"
-                            value={data.remarks}
-                            onChange={e => setData('remarks', e.target.value)}
-                        />
-                    </div>
+                    <table className="table">
+                        <tbody>
+                            <tr>
+                                <td>
+                                    <label htmlFor="day">取引日時</label><span className="required text-danger">*</span>
+                                    {errors.day && <dd className="text-danger">{errors.day}</dd>}
+                                </td>
+                                <td>
+                                    <input
+                                        type="date"
+                                        name="day"
+                                        id="day"
+                                        value={data.day}
+                                        onChange={(e) => setData('day', e.target.value)}
+                                    />
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <label htmlFor="name">勤め先</label><span className="required text-danger">*</span>
+                                    {errors.name && <dd className="text-danger">{errors.name}</dd>}
+                                </td>
+                                <td>
+                                    <input
+                                        type="text"
+                                        name="name"
+                                        value={data.name}
+                                        onChange={(e) => setData('name', e.target.value)}
+                                    />
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <label htmlFor="price">手取り金額</label><span className="required text-danger">*</span>
+                                    {errors.price && <dd className="text-danger">{errors.price}</dd>}
+                                </td>
+                                <td>
+                                    <input
+                                        type="number"
+                                        name="price"
+                                        placeholder="1000"
+                                        value={data.price}
+                                        onChange={(e) => setData('price', e.target.value)}
+                                    />
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <label htmlFor="remarks">備考</label><span className="required text-danger">*</span>
+                                    {errors.remarks && <dd className="text-danger">{errors.remarks}</dd>}
+                                </td>
+                                <td>
+                                    <input
+                                        type="text"
+                                        name="remarks"
+                                        value={data.remarks}
+                                        onChange={(e) => setData('remarks', e.target.value)}
+                                    />
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                    
                     <button type="submit" className="btn btn-success my-2" disabled={processing}>登録</button>
                     <button className="btn btn-dark my-2" onClick={() => window.history.back()}>戻る</button>
                 </form>

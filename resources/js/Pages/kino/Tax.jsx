@@ -4,7 +4,7 @@ import HeaderLayout from '@/Layouts/Header.Layout';
 
 const Tax = ({ kashi, kari, deduction1, kyuyo, deduction }) => {
   return (
-    <HeaderLayout>
+    <HeaderLayout className="bg-primary text-bg-primary">
       <div className="container p-5">
         <h2>現在の課税所得を確認</h2>
 

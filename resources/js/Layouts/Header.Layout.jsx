@@ -1,7 +1,7 @@
 import React from 'react';
 import { Link } from '@inertiajs/react';
 
-const HeaderLayout = ({ children }) => {
+const HeaderLayout = ({ children,className }) => {
   return (
     <>
       <head>
@@ -21,7 +21,8 @@ const HeaderLayout = ({ children }) => {
         ></script>
       </head>
       <body>
-        <header className="navbar bg-primary text-bg-primary" data-bs-theme="dark" id="header">
+        
+        <header className={`navbar ${className}`} data-bs-theme="dark" id="header">
           <div className="container px-4">
             <div className="title">
               <h1>個人事業主の味方</h1>

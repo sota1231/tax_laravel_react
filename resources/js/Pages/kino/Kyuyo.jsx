@@ -19,60 +19,75 @@ const Kyuyo = ({ kyuyos }) => {
   };
 
   return (
-    <HeaderLayout>
+    <HeaderLayout className="bg-primary text-bg-primary">
       <div className="container p-5">
         <h2>給与所得入力</h2>
 
         <form onSubmit={handleSubmit}>
-          <input type="hidden" name="user_id" value={data.user_id} />
-
-          <div className="box py-2">
-            <label htmlFor="day">取引日時</label><span className="required text-danger">*</span>
-            {errors.day && <dd className="text-danger">{errors.day}</dd>}
-            <input
-              type="date"
-              name="day"
-              value={data.day}
-              onChange={e => setData('day', e.target.value)}
-            />
-          </div>
-
-          <div className="box py-2">
-            <label htmlFor="name">勤め先</label><span className="required text-danger">*</span>
-            {errors.name && <dd className="text-danger">{errors.name}</dd>}
-            <input
-              type="text"
-              name="name"
-              value={data.name}
-              onChange={e => setData('name', e.target.value)}
-            />
-          </div>
-
-          <div className="box py-2">
-            <label htmlFor="price">手取り金額</label><span className="required text-danger">*</span>
-            {errors.price && <dd className="text-danger">{errors.price}</dd>}
-            <input
-              type="number"
-              name="price"
-              placeholder="1000"
-              value={data.price}
-              onChange={e => setData('price', e.target.value)}
-            />
-          </div>
-
-          <div className="box py-2">
-            <label htmlFor="remarks">備考</label><span className="required text-danger">*</span>
-            {errors.remarks && <dd className="text-danger">{errors.remarks}</dd>}
-            <input
-              type="text"
-              name="remarks"
-              placeholder="○○株式会社"
-              value={data.remarks}
-              onChange={e => setData('remarks', e.target.value)}
-            />
-          </div>
-
-          <button className="btn btn-primary my-2" disabled={processing}>登録</button>
+          <table className="table">
+            <tbody>
+              <tr>
+                <td>
+                  <label htmlFor="day">取引日時</label><span className="required text-danger">*</span>
+                  {errors.day && <dd className="text-danger">{errors.day}</dd>}
+                </td>
+                <td>
+                  <input
+                    type="date"
+                    name="day"
+                    id="day"
+                    value={data.day}
+                    onChange={(e) => setData('day', e.target.value)}
+                  />
+                </td>
+              </tr>
+              <tr>
+                <td>
+                  <label htmlFor="name">勤め先</label><span className="required text-danger">*</span>
+                  {errors.name && <dd className="text-danger">{errors.name}</dd>}
+                </td>
+                <td>
+                  <input
+                    type="text"
+                    name="name"
+                    value={data.name}
+                    onChange={(e) => setData('name', e.target.value)}
+                  />
+                </td>
+              </tr>
+              <tr>
+                <td>
+                  <label htmlFor="price">手取り金額</label><span className="required text-danger">*</span>
+                  {errors.price && <dd className="text-danger">{errors.price}</dd>}
+                </td>
+                <td>
+                  <input
+                    type="number"
+                    name="price"
+                    placeholder="1000"
+                    value={data.price}
+                    onChange={(e) => setData('price', e.target.value)}
+                  />
+                </td>
+              </tr>
+              <tr>
+                <td>
+                  <label htmlFor="remarks">備考</label><span className="required text-danger">*</span>
+                  {errors.remarks && <dd className="text-danger">{errors.remarks}</dd>}
+                </td>
+                <td>
+                  <input
+                    type="text"
+                    name="remarks"
+                    placeholder="○○株式会社"
+                    value={data.remarks}
+                    onChange={(e) => setData('remarks', e.target.value)}
+                  />
+                </td>
+              </tr>
+            </tbody>
+          </table>
+          <button type="submit" className='btn btn-primary my-2' disabled={processing}>送信</button>
         </form>
 
         <h3 className="mt-4">給与一覧</h3>
