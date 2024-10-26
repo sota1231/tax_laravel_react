@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { useForm } from '@inertiajs/react';
+import { Link, useForm } from '@inertiajs/react';
 import HeaderLayout from '@/Layouts/Header.Layout';
 import PrimaryButton from '@/Components/PrimaryButton';
 
@@ -110,10 +110,10 @@ const Index = ({ kari_names, sortings }) => {
                         </div>
                     </div>
 
-                    {/* <button type="submit" disabled={processing}>送信</button> */}
-                    <PrimaryButton className="ms-4" disabled={processing}>
+                    <button type="submit" className='btn btn-primary my-2' disabled={processing}>送信</button>
+                    {/* <PrimaryButton className="ms-4" disabled={processing}>
                         送信
-                    </PrimaryButton>
+                    </PrimaryButton> */}
                 </form>
                 <div className="mt-8">
                     <h3>仕分け一覧</h3>
@@ -137,6 +137,9 @@ const Index = ({ kari_names, sortings }) => {
                                     <td>{sorting.kashi_name}</td>
                                     <td>{sorting.kashi_price}</td>
                                     <td>{sorting.remarks}</td>
+                                    
+                                    <td><Link href={route('edit', { id: sorting.id })} className='btn btn-success my-2'>更新</Link></td>
+                                    {/* <td><Link type="submit" href={route('edit')} className='btn btn-primary my-2' disabled={processing}>更新</Link></td> */}
                                 </tr>
                             ))}
                         </tbody>

@@ -35,17 +35,17 @@ Route::post('/deduction',[SortingContoroller::class,'deduction_register'])->name
 Route::get('/tax',[SortingContoroller::class,'tax'])->name('tax');
 
 // 複式簿記更新画面・更新処理・削除処理
-Route::get('/update', [UpdateDeleteController::class, 'edit'])->name('edit'); 
+Route::get('/update/{id}', [UpdateDeleteController::class, 'edit'])->name('edit'); 
 Route::post('/update', [UpdateDeleteController::class, 'update'])->name('update'); 
 Route::get('/delete', [UpdateDeleteController::class, 'delete'])->name('delete'); 
 
 // 給与更新画面・更新処理・削除処理
-Route::get('/kyuyo_update', [UpdateDeleteController::class, 'kyuyo_edit'])->name('kyuyo_edit'); 
+Route::get('/kyuyo_update/{id}', [UpdateDeleteController::class, 'kyuyo_edit'])->name('kyuyo_edit'); 
 Route::post('/Kyuyo_update', [UpdateDeleteController::class, 'kyuyo_update'])->name('kyuyo_update'); 
 Route::get('/kyuyo_delete', [UpdateDeleteController::class, 'kyuyo_delete'])->name('kyuyo_delete'); 
 
 // 控除更新画面・更新処理・削除処理
-Route::get('/deduction_update', [UpdateDeleteController::class, 'deduction_edit'])->name('deduction_edit'); 
+Route::get('/deduction_update/{id}', [UpdateDeleteController::class, 'deduction_edit'])->name('deduction_edit'); 
 Route::post('/deduction_update', [UpdateDeleteController::class, 'deduction_update'])->name('deduction_update'); 
 Route::get('/deduction_delete', [UpdateDeleteController::class, 'deduction_delete'])->name('deduction_delete');
 

@@ -1,6 +1,6 @@
 import React from 'react';
 import { useForm } from '@inertiajs/react';
-import Layout3 from '@/Layouts/Layout3';
+import HeaderLayout from '@/Layouts/Header.Layout';
 
 const DeductionUpdate = ({ deductions, errors }) => {
     const { data, setData, post, processing } = useForm({
@@ -19,7 +19,7 @@ const DeductionUpdate = ({ deductions, errors }) => {
     };
 
     return (
-        <Layout3>
+        <HeaderLayout>
             <div className="container p-5">
                 <h2>控除編集画面</h2>
 
@@ -87,7 +87,7 @@ const DeductionUpdate = ({ deductions, errors }) => {
                     <button className="btn btn-dark" type="button" onClick={() => window.history.back()}>戻る</button>
                 </form>    
             </div>
-        </Layout3>
+        </HeaderLayout>
     );
 };
 

@@ -12,19 +12,22 @@ use Illuminate\Support\Facades\DB;
 use App\Models\Services\Deduction;
 use App\Models\Services\Ratio;
 use App\Http\Requests\SortingRequest;
-
+use Illuminate\Support\Facades\Redirect;
+use Inertia\Inertia;
 
 class UpdateDeleteController extends Controller
 {
     // 複式簿記編集画面
-    public function edit(Request $request){
+    public function edit($id){
         $sorting = new Sorting();
-        $sortings = $sorting->sorting_updata($request->id);
+        $sortings = $sorting->sorting_updata($id);
+        // $sorting = Sorting::findOrFail($id);
 
         $kari = new KariName();
         $kari_names=$kari->kari();
-        return view('kino.update' , ['sortings'=>$sortings,'kari_names'=>$kari_names]);
+        return  Inertia::render('kino/Update' , ['sortings'=>$sortings,'kari_names'=>$kari_names]);
     }
+    
     public function update(SortingRequest $request){
         $param = [
             'id'=>$request->id,
@@ -62,11 +65,11 @@ class UpdateDeleteController extends Controller
     }
 
     // 給与更新・削除
-    public function kyuyo_edit(Request $request){
+    public function kyuyo_edit($id){
         // $kyuyos = Kyuyo::find($request->id);
         $kyuyo = new Kyuyo();
-        $kyuyos = $kyuyo->kyuyo_updata($request->id);
-        return view('kino.kyuyoUpdate' , ['kyuyos'=>$kyuyos]);
+        $kyuyos = $kyuyo->kyuyo_updata($id);
+        return  Inertia::render('kino/KyuyoUpdate' , ['kyuyos'=>$kyuyos]);
     }
     public function kyuyo_update(KyuyoRequest $request){
         $param = [
@@ -96,12 +99,13 @@ class UpdateDeleteController extends Controller
     }
 
     // 控除更新・削除
-    public function deduction_edit(Request $request){
+    public function deduction_edit($id){
         // $deductions = Deduction::find($request->id);
         $deduction = new Deduction();
-        $deductions = $deduction->deduction_updata($request->id);
-        return view('kino.deductionUpdate' , ['deductions'=>$deductions]);
+        $deductions = $deduction->deduction_updata($id);
+        return Inertia::render('kino/DeductionUpdate' , ['deductions'=>$deductions]);
     }
+    
     public function deduction_update(DeductionRequest $request){
         $param = [
             'id'=>$request->id,
