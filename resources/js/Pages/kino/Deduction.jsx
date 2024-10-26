@@ -105,6 +105,20 @@ const Deduction = ({ deductions }) => {
                                 <td>{deduction.price}</td>
                                 <td>{deduction.remarks}</td>
                                 <td><Link href={route('deduction_edit', { id: deduction.id })} className='btn btn-success my-2'>更新</Link></td>
+                                <td>
+                                    <Link
+                                        href={route('deduction_delete', { id: deduction.id })}
+                                        className='btn btn-danger my-2'
+                                        onClick={(e) => {
+                                            e.preventDefault();
+                                            if (window.confirm('本当に削除しますか？')) {
+                                                window.location.href = route('deduction_delete', { id: deduction.id });
+                                            }
+                                        }}
+                                    >
+                                        削除
+                                    </Link>
+                                </td>
                             </tr>
                             ))}
                         </tbody>

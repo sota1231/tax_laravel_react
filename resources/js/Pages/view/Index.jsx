@@ -139,6 +139,18 @@ const Index = ({ kari_names, sortings }) => {
                                     <td>{sorting.remarks}</td>
                                     
                                     <td><Link href={route('edit', { id: sorting.id })} className='btn btn-success my-2'>更新</Link></td>
+                                    <Link
+                                        href={route('sorting_delete', { id: sorting.id })}
+                                        className='btn btn-danger my-2'
+                                        onClick={(e) => {
+                                            e.preventDefault();
+                                            if (window.confirm('本当に削除しますか？')) {
+                                                window.location.href = route('sorting_delete', { id: sorting.id });
+                                            }
+                                        }}
+                                    >
+                                        削除
+                                    </Link>
                                     {/* <td><Link type="submit" href={route('edit')} className='btn btn-primary my-2' disabled={processing}>更新</Link></td> */}
                                 </tr>
                             ))}

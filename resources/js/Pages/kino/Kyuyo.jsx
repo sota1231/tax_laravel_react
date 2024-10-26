@@ -1,6 +1,6 @@
 // import Layout from '../../Layouts/Layout1';
 import React from 'react';
-import { useForm,Link } from '@inertiajs/react';
+import { useForm, Link } from '@inertiajs/react';
 import HeaderLayout from '@/Layouts/Header.Layout';
 // import { Inertia } from '@inertiajs/inertia';
 
@@ -25,14 +25,14 @@ const Kyuyo = ({ kyuyos }) => {
 
         <form onSubmit={handleSubmit}>
           <input type="hidden" name="user_id" value={data.user_id} />
-          
+
           <div className="box py-2">
             <label htmlFor="day">取引日時</label><span className="required text-danger">*</span>
             {errors.day && <dd className="text-danger">{errors.day}</dd>}
-            <input 
-              type="date" 
-              name="day" 
-              value={data.day} 
+            <input
+              type="date"
+              name="day"
+              value={data.day}
               onChange={e => setData('day', e.target.value)}
             />
           </div>
@@ -40,10 +40,10 @@ const Kyuyo = ({ kyuyos }) => {
           <div className="box py-2">
             <label htmlFor="name">勤め先</label><span className="required text-danger">*</span>
             {errors.name && <dd className="text-danger">{errors.name}</dd>}
-            <input 
-              type="text" 
-              name="name" 
-              value={data.name} 
+            <input
+              type="text"
+              name="name"
+              value={data.name}
               onChange={e => setData('name', e.target.value)}
             />
           </div>
@@ -51,11 +51,11 @@ const Kyuyo = ({ kyuyos }) => {
           <div className="box py-2">
             <label htmlFor="price">手取り金額</label><span className="required text-danger">*</span>
             {errors.price && <dd className="text-danger">{errors.price}</dd>}
-            <input 
-              type="number" 
-              name="price" 
-              placeholder="1000" 
-              value={data.price} 
+            <input
+              type="number"
+              name="price"
+              placeholder="1000"
+              value={data.price}
               onChange={e => setData('price', e.target.value)}
             />
           </div>
@@ -63,11 +63,11 @@ const Kyuyo = ({ kyuyos }) => {
           <div className="box py-2">
             <label htmlFor="remarks">備考</label><span className="required text-danger">*</span>
             {errors.remarks && <dd className="text-danger">{errors.remarks}</dd>}
-            <input 
-              type="text" 
-              name="remarks" 
-              placeholder="○○株式会社" 
-              value={data.remarks} 
+            <input
+              type="text"
+              name="remarks"
+              placeholder="○○株式会社"
+              value={data.remarks}
               onChange={e => setData('remarks', e.target.value)}
             />
           </div>
@@ -94,6 +94,18 @@ const Kyuyo = ({ kyuyos }) => {
                   <td>{kyuyo.price}円</td>
                   <td>{kyuyo.remarks}</td>
                   <td><Link href={route('kyuyo_edit', { id: kyuyo.id })} className='btn btn-success my-2'>更新</Link></td>
+                  <td><Link
+                    href={route('kyuyo_delete', { id: kyuyo.id })}
+                    className='btn btn-danger my-2'
+                    onClick={(e) => {
+                      e.preventDefault();
+                      if (window.confirm('本当に削除しますか？')) {
+                        window.location.href = route('kyuyo_delete', { id: kyuyo.id });
+                      }
+                    }}
+                  >
+                    削除
+                  </Link></td>
                 </tr>
               ))}
             </tbody>

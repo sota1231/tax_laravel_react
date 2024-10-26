@@ -56,11 +56,11 @@ class UpdateDeleteController extends Controller
     public function delete(Request $request){
         $param=['id'=>$request->id];
         DB::delete('delete from sortings where id=:id',$param);
-        DB::delete('delete from deductions where user_id=:id',$param);
-        DB::delete('delete from kyuyos where user_id=:id',$param);
+        // DB::delete('delete from deductions where user_id=:id',$param);
+        // DB::delete('delete from kyuyos where user_id=:id',$param);
         
 
-        return redirect()->route('index');
+        return Redirect::route('index');
 
     }
 
@@ -95,7 +95,7 @@ class UpdateDeleteController extends Controller
         $param=['id'=>$request->id];
         DB::delete('delete from kyuyos where id=:id',$param);
 
-        return redirect()->route('kyuyo');
+        return Redirect::route('kyuyo');
     }
 
     // 控除更新・削除
@@ -131,7 +131,7 @@ class UpdateDeleteController extends Controller
         $param=['id'=>$request->id];
         DB::delete('delete from deductions where id=:id',$param);
 
-        return redirect()->route('deduction');
+        return Redirect::route('deduction');
     }
 
     // 家事按分編集画面・更新処理

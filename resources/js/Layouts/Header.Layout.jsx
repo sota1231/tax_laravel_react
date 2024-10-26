@@ -29,8 +29,8 @@ const HeaderLayout = ({ children }) => {
             <div>
               <ul className="nav">
                 <li className="nav-item"><Link className="nav-link active" aria-current="page" href={route('index')}>簿記記入</Link></li>
-                <li className="nav-item"><Link className="nav-link active" href={route('deduction')}>控除入力</Link></li>
                 <li className="nav-item"><Link className="nav-link active" href={route('kyuyo')}>給与所得入力</Link></li>
+                <li className="nav-item"><Link className="nav-link active" href={route('deduction')}>控除入力</Link></li>
                 <li className="nav-item"><Link className="nav-link active" href={route('tax')}>現在の所得を確認</Link></li>
                 <li className="nav-item mx-2"><Link href={route('logout')}><button className="btn btn-light">ログアウト</button></Link></li>
               </ul>
