@@ -82,7 +82,7 @@ const Deduction = ({ deductions }) => {
                         />
                     </div>
 
-                    <button type="submit" className='btn btn-success my-2' disabled={processing}>送信</button>
+                    <button type="submit" className='btn btn-primary my-2' disabled={processing}>送信</button>
                 </form>
                 <div className="mt-8">
                     <h3>控除一覧</h3>
@@ -104,7 +104,7 @@ const Deduction = ({ deductions }) => {
                                 <td>{deduction.role === 0 ? '通常の控除' : '事業所得控除'}</td>
                                 <td>{deduction.price}</td>
                                 <td>{deduction.remarks}</td>
-                                <td><Link href={route('deduction_edit', { id: deduction.id })} className='btn btn-primary my-2'>更新</Link></td>
+                                <td><Link href={route('deduction_edit', { id: deduction.id })} className='btn btn-success my-2'>更新</Link></td>
                             </tr>
                             ))}
                         </tbody>

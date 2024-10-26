@@ -50,7 +50,7 @@ class UpdateDeleteController extends Controller
                 user_id =:user_id 
                 where id =:id',$param);
 
-        return redirect()->route('index');
+        return Redirect::route('index');
 
     }
     public function delete(Request $request){
@@ -89,7 +89,7 @@ class UpdateDeleteController extends Controller
                 user_id =:user_id 
                 where id =:id',$param);
 
-        return redirect()->route('kyuyo');
+        return Redirect::route('kyuyo');
     }
     public function kyuyo_delete(Request $request){
         $param=['id'=>$request->id];
@@ -124,7 +124,7 @@ class UpdateDeleteController extends Controller
                 user_id =:user_id 
                 where id =:id',$param);
 
-        return redirect()->route('deduction');
+        return Redirect::route('deduction');
 
     }
     public function deduction_delete(Request $request){
