@@ -2,6 +2,7 @@ import React from 'react';
 import { useForm, Link } from '@inertiajs/react';
 import HeaderLayout from '@/Layouts/Header.Layout';
 import FormSelect from '@/Components/FormSelect';
+import FormInputField from '@/Components/FormInputField';
 
 const Update = ({ sortings, kari_names }) => {
     const { data, setData, post, processing, errors } = useForm({
@@ -36,7 +37,7 @@ const Update = ({ sortings, kari_names }) => {
                                     {errors.day && <dd className="text-danger">{errors.day}</dd>}
                                 </td>
                                 <td>
-                                    <input
+                                    <FormInputField
                                         type="date"
                                         name="day"
                                         id="day"
@@ -81,7 +82,7 @@ const Update = ({ sortings, kari_names }) => {
                                     {errors.kari_price && <dd className="text-danger">{errors.kari_price}</dd>}
                                 </td>
                                 <td>
-                                    <input
+                                    <FormInputField
                                         type="number"
                                         name="kari_price"
                                         placeholder="1000"
@@ -94,7 +95,7 @@ const Update = ({ sortings, kari_names }) => {
                                     {errors.kashi_price && <dd className="text-danger">{errors.kashi_price}</dd>}
                                 </td>
                                 <td>
-                                    <input
+                                    <FormInputField
                                         type="number"
                                         name="kashi_price"
                                         placeholder="1000"
@@ -108,7 +109,7 @@ const Update = ({ sortings, kari_names }) => {
                                     {errors.remarks && <dd className="text-danger">{errors.remarks}</dd>}
                                 </td>
                                 <td>
-                                    <input
+                                    <FormInputField
                                         type="text"
                                         name="remarks"
                                         placeholder="〇月家賃"
