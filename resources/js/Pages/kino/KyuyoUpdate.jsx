@@ -1,6 +1,7 @@
 import React from 'react';
 import { useForm, Link } from '@inertiajs/react';
 import HeaderLayout from '@/Layouts/Header.Layout';
+import FormInputField from '@/Components/FormInputField';
 
 const KyuyoUpdate = ({ kyuyos }) => {
     const { data, setData, post, processing, errors } = useForm({
@@ -34,7 +35,7 @@ const KyuyoUpdate = ({ kyuyos }) => {
                                     {errors.day && <dd className="text-danger">{errors.day}</dd>}
                                 </td>
                                 <td>
-                                    <input
+                                    <FormInputField
                                         type="date"
                                         name="day"
                                         id="day"
@@ -49,7 +50,7 @@ const KyuyoUpdate = ({ kyuyos }) => {
                                     {errors.name && <dd className="text-danger">{errors.name}</dd>}
                                 </td>
                                 <td>
-                                    <input
+                                    <FormInputField
                                         type="text"
                                         name="name"
                                         value={data.name}
@@ -63,7 +64,7 @@ const KyuyoUpdate = ({ kyuyos }) => {
                                     {errors.price && <dd className="text-danger">{errors.price}</dd>}
                                 </td>
                                 <td>
-                                    <input
+                                    <FormInputField
                                         type="number"
                                         name="price"
                                         placeholder="1000"
@@ -78,7 +79,7 @@ const KyuyoUpdate = ({ kyuyos }) => {
                                     {errors.remarks && <dd className="text-danger">{errors.remarks}</dd>}
                                 </td>
                                 <td>
-                                    <input
+                                    <FormInputField
                                         type="text"
                                         name="remarks"
                                         value={data.remarks}
@@ -89,8 +90,8 @@ const KyuyoUpdate = ({ kyuyos }) => {
                         </tbody>
                     </table>
                     
-                    <button type="submit" className="btn btn-success my-2" disabled={processing}>登録</button>
-                    <button className="btn btn-dark my-2" onClick={() => window.history.back()}>戻る</button>
+                    <button type="submit" className="btn btn-success my-2 px-4" disabled={processing}>更新</button>
+                    <button className="btn btn-dark my-2 px-4 mx-2" onClick={() => window.history.back()}>戻る</button>
                 </form>
             </div>
         </HeaderLayout>

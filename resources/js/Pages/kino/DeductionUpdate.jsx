@@ -2,6 +2,7 @@ import React from 'react';
 import { useForm } from '@inertiajs/react';
 import HeaderLayout from '@/Layouts/Header.Layout';
 import FormSelect from '@/Components/FormSelect';
+import FormInputField from '@/Components/FormInputField';
 
 
 const DeductionUpdate = ({ deductions, errors }) => {
@@ -36,7 +37,7 @@ const DeductionUpdate = ({ deductions, errors }) => {
                                     {errors.day && <dd className="text-danger">{errors.day}</dd>}
                                 </td>
                                 <td>
-                                    <input
+                                    <FormInputField
                                         type="date"
                                         name="day"
                                         id="day"
@@ -51,7 +52,7 @@ const DeductionUpdate = ({ deductions, errors }) => {
                                     {errors.name && <dd className="text-danger">{errors.name}</dd>}
                                 </td>
                                 <td>
-                                    <input
+                                    <FormInputField
                                         type="text"
                                         name="name"
                                         value={data.name}
@@ -81,7 +82,7 @@ const DeductionUpdate = ({ deductions, errors }) => {
                                     {errors.price && <dd className="text-danger">{errors.price}</dd>}
                                 </td>
                                 <td>
-                                    <input
+                                    <FormInputField
                                         type="number"
                                         name="price"
                                         placeholder="1000"
@@ -96,7 +97,7 @@ const DeductionUpdate = ({ deductions, errors }) => {
                                     {errors.remarks && <dd className="text-danger">{errors.remarks}</dd>}
                                 </td>
                                 <td>
-                                    <input
+                                    <FormInputField
                                         type="text"
                                         name="remarks"
                                         placeholder="備考を入力"
@@ -107,8 +108,8 @@ const DeductionUpdate = ({ deductions, errors }) => {
                             </tr>
                         </tbody>
                     </table>
-                    <button className="btn btn-success my-2" type="submit" disabled={processing}>編集</button>
-                    <button className="btn btn-dark" type="button" onClick={() => window.history.back()}>戻る</button>
+                    <button className="btn btn-success px-4" type="submit" disabled={processing}>編集</button>
+                    <button className="btn btn-dark px-4 mx-2" type="button" onClick={() => window.history.back()}>戻る</button>
                 </form>
             </div>
         </HeaderLayout>

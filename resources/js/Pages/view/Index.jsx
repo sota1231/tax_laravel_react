@@ -48,7 +48,7 @@ const Index = ({ kari_names, sortings }) => {
                                     {errors.kari_name && <dd className="text-danger">{errors.kari_name}</dd>}
                                 </td>
                                 <td>
-                                <FormSelect
+                                    <FormSelect
                                         name="kari_name"
                                         value={data.kari_name}
                                         onChange={(e) => setData('kari_name', e.target.value)}
@@ -122,27 +122,43 @@ const Index = ({ kari_names, sortings }) => {
                         </div>
                     </div>
 
-                    <button type="submit" className='btn btn-primary my-2' disabled={processing}>送信</button>
+                    <button type="submit" className='btn btn-primary px-4' disabled={processing}>送信</button>
                     {/* <PrimaryButton className="ms-4" disabled={processing}>
                         送信
                     </PrimaryButton> */}
                 </form>
                 <div className="mt-8">
                     <h3>仕分け一覧</h3>
-                    <table className="table table-striped">
+                    <div className="pagination py-2">
+                        {sortings.links.map((link, index) => (
+                            <Link
+                                key={index}
+                                href={link.url}
+                                className={`btn btn-sm ${link.active ? 'btn-primary' : 'btn-outline-primary'} mx-1`}
+                                dangerouslySetInnerHTML={{ __html: link.label }}
+                                preserveState
+                                preserveScroll
+                            />
+                        ))}
+                    </div>
+                    <table className="table table-striped table-sm">
                         <thead>
                             <tr>
-                                <th>日付</th>
-                                <th>借方名</th>
-                                <th>借方金額</th>
-                                <th>貸方名</th>
-                                <th>貸方金額</th>
-                                <th>備考</th>
+                                <th className='bg-success-subtle'>ID</th>
+                                <th className='bg-success-subtle'>日付</th>
+                                <th className='bg-success-subtle'>借方名</th>
+                                <th className='bg-success-subtle'>借方金額</th>
+                                <th className='bg-danger-subtle'>貸方名</th>
+                                <th className='bg-danger-subtle'>貸方金額</th>
+                                <th className='bg-danger-subtle'>備考</th>
+                                <th></th>
+                                <th></th>
                             </tr>
                         </thead>
                         <tbody>
                             {sortings.data.map((sorting, index) => (
                                 <tr key={index}>
+                                    <td>{index + 1}</td>
                                     <td>{sorting.date}</td>
                                     <td>{sorting.kari_name}</td>
                                     <td>{sorting.kari_price}</td>
@@ -150,10 +166,11 @@ const Index = ({ kari_names, sortings }) => {
                                     <td>{sorting.kashi_price}</td>
                                     <td>{sorting.remarks}</td>
 
-                                    <td><Link href={route('edit', { id: sorting.id })} className='btn btn-success my-2'>更新</Link></td>
+
+                                    <td><Link href={route('edit', { id: sorting.id })} className='btn btn-success btn-sm'>更新</Link></td>
                                     <td><Link
                                         href={route('delete', { id: sorting.id })}
-                                        className='btn btn-danger my-2'
+                                        className='btn btn-danger btn-sm'
                                         onClick={(e) => {
                                             e.preventDefault();
                                             if (window.confirm('本当に削除しますか？')) {

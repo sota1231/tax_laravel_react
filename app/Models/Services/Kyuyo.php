@@ -34,7 +34,8 @@ class Kyuyo extends Model
         ->selectRaw('DATE_FORMAT(day,"%Y-%m-%d") as date')
         ->where('user_id',$id,0)
         ->orderBy('day','DESC')
-        ->paginate(20);
+        ->paginate(10)
+        ->withQueryString();
     }
 
     public function kyuyo_updata($id){

@@ -8,10 +8,12 @@ const FormSelect = ({ label, name, value, onChange, options, errors }) => {
     return (
         <div className="box py-">
             <select
+                className='form-control form-control-sm'
                 name={name}
                 value={value}
                 onChange={onChange}
             >
+                <option></option>
                 {options.map((option, index) => (
                     <option key={index} value={option.value}>{option.label}</option>
                 ))}

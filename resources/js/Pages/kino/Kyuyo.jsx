@@ -2,6 +2,7 @@
 import React from 'react';
 import { useForm, Link } from '@inertiajs/react';
 import HeaderLayout from '@/Layouts/Header.Layout';
+import FormInputField from '@/Components/FormInputField';
 // import { Inertia } from '@inertiajs/inertia';
 
 const Kyuyo = ({ kyuyos }) => {
@@ -32,7 +33,7 @@ const Kyuyo = ({ kyuyos }) => {
                   {errors.day && <dd className="text-danger">{errors.day}</dd>}
                 </td>
                 <td>
-                  <input
+                  <FormInputField
                     type="date"
                     name="day"
                     id="day"
@@ -47,7 +48,7 @@ const Kyuyo = ({ kyuyos }) => {
                   {errors.name && <dd className="text-danger">{errors.name}</dd>}
                 </td>
                 <td>
-                  <input
+                  <FormInputField
                     type="text"
                     name="name"
                     value={data.name}
@@ -61,7 +62,7 @@ const Kyuyo = ({ kyuyos }) => {
                   {errors.price && <dd className="text-danger">{errors.price}</dd>}
                 </td>
                 <td>
-                  <input
+                  <FormInputField
                     type="number"
                     name="price"
                     placeholder="1000"
@@ -76,7 +77,7 @@ const Kyuyo = ({ kyuyos }) => {
                   {errors.remarks && <dd className="text-danger">{errors.remarks}</dd>}
                 </td>
                 <td>
-                  <input
+                  <FormInputField
                     type="text"
                     name="remarks"
                     placeholder="○○株式会社"
@@ -87,18 +88,30 @@ const Kyuyo = ({ kyuyos }) => {
               </tr>
             </tbody>
           </table>
-          <button type="submit" className='btn btn-primary my-2' disabled={processing}>送信</button>
+          <button type="submit" className='btn btn-primary px-4' disabled={processing}>送信</button>
         </form>
 
         <h3 className="mt-4">給与一覧</h3>
+        <div className="pagination py-2">
+          {kyuyos.links.map((link, index) => (
+            <Link
+              key={index}
+              href={link.url}
+              className={`btn btn-sm ${link.active ? 'btn-primary' : 'btn-outline-primary'} mx-1`}
+              dangerouslySetInnerHTML={{ __html: link.label }}
+              preserveState
+              preserveScroll
+            />
+          ))}
+        </div>
         <div className="table-responsive">
-          <table className="table table-striped">
+          <table className="table table-striped table-sm">
             <thead>
               <tr>
-                <th>取引日時</th>
-                <th>勤め先</th>
-                <th>手取り金額</th>
-                <th>備考</th>
+                <th className='bg-success-subtle'>取引日時</th>
+                <th className='bg-success-subtle'>勤め先</th>
+                <th className='bg-success-subtle'>手取り金額</th>
+                <th className='bg-success-subtle'>備考</th>
               </tr>
             </thead>
             <tbody>
@@ -108,10 +121,10 @@ const Kyuyo = ({ kyuyos }) => {
                   <td>{kyuyo.name}</td>
                   <td>{kyuyo.price}円</td>
                   <td>{kyuyo.remarks}</td>
-                  <td><Link href={route('kyuyo_edit', { id: kyuyo.id })} className='btn btn-success my-2'>更新</Link></td>
+                  <td><Link href={route('kyuyo_edit', { id: kyuyo.id })} className='btn btn-success btn-sm'>更新</Link></td>
                   <td><Link
                     href={route('kyuyo_delete', { id: kyuyo.id })}
-                    className='btn btn-danger my-2'
+                    className='btn btn-danger btn-sm'
                     onClick={(e) => {
                       e.preventDefault();
                       if (window.confirm('本当に削除しますか？')) {

@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { useForm, Link } from '@inertiajs/react';
 import HeaderLayout from '@/Layouts/Header.Layout';
 import FormSelect from '@/Components/FormSelect';
+import FormInputField from '@/Components/FormInputField';
 // import { Inertia } from '@inertiajs/inertia';
 
 const Deduction = ({ deductions }) => {
@@ -33,7 +34,7 @@ const Deduction = ({ deductions }) => {
                                     {errors.day && <dd className="text-danger">{errors.day}</dd>}
                                 </td>
                                 <td>
-                                    <input
+                                    <FormInputField
                                         type="date"
                                         name="day"
                                         id="day"
@@ -48,7 +49,7 @@ const Deduction = ({ deductions }) => {
                                     {errors.name && <dd className="text-danger">{errors.name}</dd>}
                                 </td>
                                 <td>
-                                    <input
+                                    <FormInputField
                                         type="text"
                                         name="name"
                                         value={data.name}
@@ -79,7 +80,7 @@ const Deduction = ({ deductions }) => {
                                     {errors.price && <dd className="text-danger">{errors.price}</dd>}
                                 </td>
                                 <td>
-                                    <input
+                                    <FormInputField
                                         type="number"
                                         name="price"
                                         placeholder="1000"
@@ -94,7 +95,7 @@ const Deduction = ({ deductions }) => {
                                     {errors.remarks && <dd className="text-danger">{errors.remarks}</dd>}
                                 </td>
                                 <td>
-                                    <input
+                                    <FormInputField
                                         type="text"
                                         name="remarks"
                                         placeholder="備考を入力"
@@ -105,18 +106,30 @@ const Deduction = ({ deductions }) => {
                             </tr>
                         </tbody>
                     </table>
-                    <button type="submit" className='btn btn-primary my-2' disabled={processing}>送信</button>
+                    <button type="submit" className='btn btn-primary px-4' disabled={processing}>送信</button>
                 </form>
                 <div className="mt-8">
                     <h3>控除一覧</h3>
-                    <table className="table table-striped">
+                    <div className="pagination py-2">
+                        {deductions.links.map((link, index) => (
+                            <Link
+                                key={index}
+                                href={link.url}
+                                className={`btn btn-sm ${link.active ? 'btn-primary' : 'btn-outline-primary'} mx-1`}
+                                dangerouslySetInnerHTML={{ __html: link.label }}
+                                preserveState
+                                preserveScroll
+                            />
+                        ))}
+                    </div>
+                    <table className="table table-striped table-sm">
                         <thead>
                             <tr>
-                                <th>日付</th>
-                                <th>控除名</th>
-                                <th>控除種類</th>
-                                <th>金額</th>
-                                <th>備考</th>
+                                <th className='bg-success-subtle'>日付</th>
+                                <th className='bg-success-subtle'>控除名</th>
+                                <th className='bg-success-subtle'>控除種類</th>
+                                <th className='bg-success-subtle'>金額</th>
+                                <th className='bg-success-subtle'>備考</th>
                             </tr>
                         </thead>
                         <tbody>
@@ -127,11 +140,11 @@ const Deduction = ({ deductions }) => {
                                     <td>{deduction.role === 0 ? '通常の控除' : '事業所得控除'}</td>
                                     <td>{deduction.price}</td>
                                     <td>{deduction.remarks}</td>
-                                    <td><Link href={route('deduction_edit', { id: deduction.id })} className='btn btn-success my-2'>更新</Link></td>
+                                    <td><Link href={route('deduction_edit', { id: deduction.id })} className='btn btn-success btn-sm'>更新</Link></td>
                                     <td>
                                         <Link
                                             href={route('deduction_delete', { id: deduction.id })}
-                                            className='btn btn-danger my-2'
+                                            className='btn btn-danger btn-sm'
                                             onClick={(e) => {
                                                 e.preventDefault();
                                                 if (window.confirm('本当に削除しますか？')) {

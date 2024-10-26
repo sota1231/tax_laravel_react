@@ -64,16 +64,12 @@ const Update = ({ sortings, kari_names }) => {
                                     {errors.kashi_name && <dd className="text-danger">{errors.kashi_name}</dd>}
                                 </td>
                                 <td>
-                                    <select
+                                    <FormSelect
                                         name="kashi_name"
                                         value={data.kashi_name}
                                         onChange={(e) => setData('kashi_name', e.target.value)}
-                                    >
-                                        <option value={data.kashi_name}>{data.kashi_name}</option>
-                                        {kari_names.map((name, index) => (
-                                            <option key={index} value={name.name}>{name.name}</option>
-                                        ))}
-                                    </select>
+                                        options={kari_names.map(name => ({ value: name.name, label: name.name }))}
+                                    />
                                 </td>
                             </tr>
                             <tr>
@@ -123,8 +119,8 @@ const Update = ({ sortings, kari_names }) => {
 
 
 
-                    <button type="submit" className="btn btn-success my-2" disabled={processing}>更新</button>
-                    <button type="button" class="btn btn-dark my-2" onClick={() => window.history.back()}>戻る</button>
+                    <button type="submit" className="btn btn-success px-4" disabled={processing}>更新</button>
+                    <button type="button" class="btn btn-dark px-4 mx-2" onClick={() => window.history.back()}>戻る</button>
                 </form>
             </div>
         </HeaderLayout>

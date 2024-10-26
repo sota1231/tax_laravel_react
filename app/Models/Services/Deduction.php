@@ -30,7 +30,8 @@ class Deduction extends Model
         ->selectRaw('DATE_FORMAT(day,"%Y-%m-%d") as date')
         ->where('user_id',$id)
         ->orderBy('day','DESC')
-        ->paginate(20);
+        ->paginate(10)
+        ->withQueryString();
     }
 
     public function deduction_updata($id){
