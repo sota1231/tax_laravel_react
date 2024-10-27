@@ -3,6 +3,7 @@ import { useForm, Link } from '@inertiajs/react';
 import HeaderLayout from '@/Layouts/Header.Layout';
 import FormSelect from '@/Components/FormSelect';
 import FormInputField from '@/Components/FormInputField';
+import FlashMessage from '@/Components/FlashMessage';
 // import { Inertia } from '@inertiajs/inertia';
 
 const Deduction = ({ deductions }) => {
@@ -23,8 +24,8 @@ const Deduction = ({ deductions }) => {
     return (
         <HeaderLayout className="bg-primary text-bg-primary">
             <div className="container p-5">
-                <h2>控除登録画面</h2>
-
+            <FlashMessage />
+            <h2>控除登録画面</h2>
                 <form onSubmit={handleSubmit}>
                     <table className="table">
                         <tbody>

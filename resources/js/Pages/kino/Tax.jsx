@@ -21,7 +21,7 @@ const Tax = ({ kashi, kari, deduction1, kyuyo, deduction }) => {
                 </tr>
                 <tr>
                   <td className="label fs-4">控除合計：</td>
-                  <td className="value text-end fs-4">-{(deduction?.sum || 0) + 480000}</td>
+                  <td className="value text-end fs-4">-{(Number(deduction?.sum || 0) + 480000).toLocaleString()}</td>
                 </tr>
                 <tr className="final-result border-top">
                   <td className="label fs-4 text-danger fw-bold">課税所得：</td>
@@ -50,7 +50,7 @@ const Tax = ({ kashi, kari, deduction1, kyuyo, deduction }) => {
                   <span className="fw-bold">売上：</span> {kashi?.sum || 0}<br/>
                   <span className="fw-bold">経費：</span> -{kari?.sum || 0}<br/>
                   <span className="fw-bold">青色申告特別控除：</span> -{deduction1?.sum || 0}<br/>
-                  <span className="fw-bold text-primary">合計：</span> {Math.max((kashi?.sum || 0) - (kari?.sum || 0) - (deduction1?.sum || 0), 0)}
+                  <span className="fw-bold text-primary fs-4">合計：</span><span className='fs-4'>{Math.max((kashi?.sum || 0) - (kari?.sum || 0) - (deduction1?.sum || 0), 0)}</span>
                 </p>
               </div>
             </div>
@@ -64,7 +64,7 @@ const Tax = ({ kashi, kari, deduction1, kyuyo, deduction }) => {
                 <p className="card-text">
                   <span className="fw-bold">給料：</span> {kyuyo?.sum || 0}<br/>
                   <span className="fw-bold">給料所得控除：</span> -650000<br/>
-                  <span className="fw-bold text-success">合計：</span> {Math.max((kyuyo?.sum || 0) - 650000, 0)}
+                  <span className="fw-bold text-success fs-4">合計：</span><span className='fs-4'>{Math.max((kyuyo?.sum || 0) - 650000, 0)}</span>
                 </p>
               </div>
             </div>
@@ -76,9 +76,9 @@ const Tax = ({ kashi, kari, deduction1, kyuyo, deduction }) => {
               </div>
               <div className="card-body">
                 <p className="card-text">
-                  <span className="fw-bold">控除額：</span> {deduction?.sum || 0}<br/>
-                  <span className="fw-bold">基礎控除：</span> 480000<br/>
-                  <span className="fw-bold text-danger">合計：</span> {(deduction?.sum || 0) + 480000}
+                  <span className="fw-bold">控除額：</span> {Number(deduction?.sum || 0).toLocaleString()}<br/>
+                  <span className="fw-bold">基礎控除：</span> {Number(480000).toLocaleString()}<br/>
+                  <span className="fw-bold text-danger fs-4">合計：</span><span className='fs-4'>{(Number(deduction?.sum || 0) + 480000).toLocaleString()}</span>
                 </p>
               </div>
             </div>

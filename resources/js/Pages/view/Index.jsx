@@ -1,8 +1,10 @@
-import React, { useState } from 'react';
-import { Link, useForm } from '@inertiajs/react';
+import React, { useState, useEffect } from 'react';
+import { Link, useForm, usePage } from '@inertiajs/react';
 import HeaderLayout from '@/Layouts/Header.Layout';
 import FormSelect from '@/Components/FormSelect';
 import FormInputField from '@/Components/FormInputField';
+import FlashMessage from '@/Components/FlashMessage';
+
 
 const Index = ({ kari_names, sortings }) => {
     const { data, setData, post, processing, errors } = useForm({
@@ -21,7 +23,9 @@ const Index = ({ kari_names, sortings }) => {
 
     return (
         <HeaderLayout className="bg-primary text-bg-primary">
+
             <div className="container p-5">
+                <FlashMessage />
                 <h2>複式簿記</h2>
                 <form onSubmit={handleSubmit}>
 

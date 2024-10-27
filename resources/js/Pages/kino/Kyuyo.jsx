@@ -3,6 +3,7 @@ import React from 'react';
 import { useForm, Link } from '@inertiajs/react';
 import HeaderLayout from '@/Layouts/Header.Layout';
 import FormInputField from '@/Components/FormInputField';
+import FlashMessage from '@/Components/FlashMessage';
 // import { Inertia } from '@inertiajs/inertia';
 
 const Kyuyo = ({ kyuyos }) => {
@@ -22,8 +23,8 @@ const Kyuyo = ({ kyuyos }) => {
   return (
     <HeaderLayout className="bg-primary text-bg-primary">
       <div className="container p-5">
-        <h2>給与所得入力</h2>
-
+      <FlashMessage />
+      <h2>給与所得入力</h2>
         <form onSubmit={handleSubmit}>
           <table className="table">
             <tbody>

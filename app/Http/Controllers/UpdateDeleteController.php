@@ -50,7 +50,7 @@ class UpdateDeleteController extends Controller
                 user_id =:user_id 
                 where id =:id',$param);
 
-        return Redirect::route('index');
+        return Redirect::route('index')->with('message', '更新が完了しました。');
 
     }
     public function delete(Request $request){
@@ -60,7 +60,7 @@ class UpdateDeleteController extends Controller
         // DB::delete('delete from kyuyos where user_id=:id',$param);
         
 
-        return Redirect::route('index');
+        return Redirect::route('index')->with('message', '削除が完了しました。');
 
     }
 
@@ -89,13 +89,13 @@ class UpdateDeleteController extends Controller
                 user_id =:user_id 
                 where id =:id',$param);
 
-        return Redirect::route('kyuyo');
+        return Redirect::route('kyuyo')->with('message', '更新が完了しました。');
     }
     public function kyuyo_delete(Request $request){
         $param=['id'=>$request->id];
         DB::delete('delete from kyuyos where id=:id',$param);
 
-        return Redirect::route('kyuyo');
+        return Redirect::route('kyuyo')->with('message', '削除が完了しました。');
     }
 
     // 控除更新・削除
@@ -124,14 +124,14 @@ class UpdateDeleteController extends Controller
                 user_id =:user_id 
                 where id =:id',$param);
 
-        return Redirect::route('deduction');
+        return Redirect::route('deduction')->with('message', '更新が完了しました。');
 
     }
     public function deduction_delete(Request $request){
         $param=['id'=>$request->id];
         DB::delete('delete from deductions where id=:id',$param);
 
-        return Redirect::route('deduction');
+        return Redirect::route('deduction')->with('message', '削除が完了しました。');
     }
 
     // 家事按分編集画面・更新処理
@@ -166,6 +166,6 @@ class UpdateDeleteController extends Controller
         $param=['id'=>$request->id];
         DB::delete('delete from users where id=:id',$param);
 
-        return redirect()->route('index');
+        return redirect()->route('index')->with('message', '削除が完了しました。');
     }
 }

@@ -15,77 +15,98 @@ use App\Http\Requests\KyuyoRequest;
 use Illuminate\Support\Facades\Redirect;
 use Inertia\Inertia;
 
-class SortingContoroller extends Controller{
+class SortingContoroller extends Controller
+{
 
     // ログインユーザーのみ
     // public function __construct(){
     //     $this->middleware('auth');
     // }
 
-    // top画面
-    public function index(){
+    // 仕分け登録画面 ==============================================
+    public function index()
+    {
         $user = Auth::user();
-        if($user->role==1){
+        if ($user->role == 1) {
             $kari = new KariName();
-            $kari_names=$kari->kari();
-            // 仕分けのデータを取得してtabelを作成する
+            $kari_names = $kari->kari();
 
             $id = Auth::id();
             $sorting = new Sorting();
-            $sortings =$sorting->alldata($id); 
-            return Inertia::render('view/Index', ['kari_names'=>$kari_names,'sortings'=>$sortings]);
-        
-        //　roleが０なら管理者画面へ遷移 
-        }else{
-            $users = DB::table('users')->select('*')->selectRaw('DATE_FORMAT(created_at,"%Y-%m-%d") as day') ->paginate(20); 
-            return Inertia::render('view/Manager',['users'=>$users]);
+            $sortings = $sorting->alldata($id);
+            return Inertia::render('view/Index', [
+                'kari_names' => $kari_names,
+                'sortings' => $sortings,
+                'flash' => [
+                    'message' => session('message')
+                ]
+            ]);
+
+            //　roleが０なら管理者画面へ遷移 
+        } else {
+            $users = DB::table('users')->select('*')->selectRaw('DATE_FORMAT(created_at,"%Y-%m-%d") as day')->paginate(20);
+            return Inertia::render('view/Manager', [
+                'users' => $users,
+                'flash' => [
+                    'message' => session('message')
+                ]
+            ]);
         }
     }
-
-    // 仕分け登録
-    public function store(SortingRequest $request){
+    public function store(SortingRequest $request)
+    {
         $sorting = new Sorting();
-        $sortings =$sorting->register($request); 
-        return Redirect::route('index');
+        $sortings = $sorting->register($request);
+        return Redirect::route('index')->with('message', '仕分けが正常に登録されました。');
     }
 
-    // 控除登録画面
-    public function deduction(){
+    // 控除登録画面 ====================================
+    public function deduction()
+    {
         $id = Auth::id();
         $deduction = new Deduction();
         $deductions = $deduction->alldata($id);
-        return Inertia::render('kino/Deduction',['deductions'=>$deductions]);
+        return Inertia::render('kino/Deduction', [
+            'deductions' => $deductions,
+            'flash' => [
+                'message' => session('message')
+            ]
+        ]);
     }
-
-    // 控除登録
-    public function deduction_register(DeductionRequest $request){
+    public function deduction_register(DeductionRequest $request)
+    {
         $deduction = new Deduction();
-        $deductions =$deduction->register($request); 
-        return Redirect::route('deduction');
+        $deductions = $deduction->register($request);
+        return Redirect::route('deduction')->with('message', '控除が正常に登録されました。');
     }
 
-    // 給料入力画面
-    public function kyuyo(){
+    // 給料入力画面 ======================================
+    public function kyuyo()
+    {
         $id = Auth::id();
         $kyuyo = new Kyuyo();
         $kyuyos = $kyuyo->alldata($id);
-        return Inertia::render('kino/Kyuyo',['kyuyos'=>$kyuyos]);
+        return Inertia::render('kino/Kyuyo', [
+            'kyuyos' => $kyuyos,
+            'flash' => [
+                'message' => session('message')
+            ]
+        ]);
     }
-
-    // 給料登録画面
-    public function kyuyo_register(KyuyoRequest $request){
+    public function kyuyo_register(KyuyoRequest $request)
+    {
         $kyuyo = new Kyuyo();
-        $kyuyos =$kyuyo->register($request); 
-        return Redirect::route('kyuyo');
+        $kyuyos = $kyuyo->register($request);
+        return Redirect::route('kyuyo')->with('message', '給与が正常に登録されました。');
     }
 
-
-
-    public function tax(){
+    //  
+    public function tax()
+    {
         // sortingのuser_idとnameが売上げのデータの合計
         // TODO:Authの機能を追加する
-        // $id = Auth::id();
-        $id =1 ;
+        $id = Auth::id();
+        // $id = 1;
         $sorting = new Sorting();
         $kari = $sorting->sumPrice($id);
         // sortingのuser_idとnameが消耗品、、、、のデータの合計
@@ -106,6 +127,6 @@ class SortingContoroller extends Controller{
 
 
 
-        return Inertia::render('kino/Tax',['kashi'=>$kashi,'kari'=>$kari,'deduction'=>$deduction,'deduction1'=>$deduction1,'kyuyo'=>$kyuyo]);
+        return Inertia::render('kino/Tax', ['kashi' => $kashi, 'kari' => $kari, 'deduction' => $deduction, 'deduction1' => $deduction1, 'kyuyo' => $kyuyo]);
     }
 }
