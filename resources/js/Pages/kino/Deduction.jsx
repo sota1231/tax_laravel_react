@@ -137,10 +137,10 @@ const Deduction = ({ deductions }) => {
                             {deductions.data.map((deduction, index) => (
                                 <tr key={index}>
                                     <td>{deduction.date}</td>
-                                    <td>{deduction.name}</td>
+                                    <td>{deduction.name.length > 10 ? `${deduction.name.slice(0, 10)}...` : deduction.name}</td>
                                     <td>{deduction.role === 0 ? '通常の控除' : '事業所得控除'}</td>
                                     <td>{deduction.price}</td>
-                                    <td>{deduction.remarks}</td>
+                                    <td>{deduction.remarks.length > 10 ? `${deduction.remarks.slice(0, 10)}...` : deduction.remarks}</td>
                                     <td><Link href={route('deduction_edit', { id: deduction.id })} className='btn btn-success btn-sm'>更新</Link></td>
                                     <td>
                                         <Link

@@ -23,8 +23,8 @@ const Kyuyo = ({ kyuyos }) => {
   return (
     <HeaderLayout className="bg-primary text-bg-primary">
       <div className="container p-5">
-      <FlashMessage />
-      <h2>給与所得入力</h2>
+        <FlashMessage />
+        <h2>給与所得入力</h2>
         <form onSubmit={handleSubmit}>
           <table className="table">
             <tbody>
@@ -119,9 +119,9 @@ const Kyuyo = ({ kyuyos }) => {
               {kyuyos.data.map((kyuyo, index) => (
                 <tr key={index}>
                   <td>{kyuyo.date}</td>
-                  <td>{kyuyo.name}</td>
+                  <td>{kyuyo.name.length > 10 ? `${kyuyo.name.slice(0, 10)}...` : kyuyo.name}</td>
                   <td>{kyuyo.price}円</td>
-                  <td>{kyuyo.remarks}</td>
+                  <td>{kyuyo.remarks.length > 10 ? `${kyuyo.remarks.slice(0, 10)}...` : kyuyo.remarks}</td>
                   <td><Link href={route('kyuyo_edit', { id: kyuyo.id })} className='btn btn-success btn-sm'>更新</Link></td>
                   <td><Link
                     href={route('kyuyo_delete', { id: kyuyo.id })}

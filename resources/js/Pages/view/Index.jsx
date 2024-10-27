@@ -164,13 +164,11 @@ const Index = ({ kari_names, sortings }) => {
                                 <tr key={index}>
                                     <td>{index + 1}</td>
                                     <td>{sorting.date}</td>
-                                    <td>{sorting.kari_name}</td>
+                                    <td>{sorting.kari_name.length > 10 ? `${sorting.kari_name.slice(0, 10)}...` : sorting.kari_name}</td>
                                     <td>{sorting.kari_price}</td>
-                                    <td>{sorting.kashi_name}</td>
+                                    <td>{sorting.kashi_name.length > 10 ? `${sorting.kashi_name.slice(0, 10)}...` : sorting.kashi_name}</td>
                                     <td>{sorting.kashi_price}</td>
-                                    <td>{sorting.remarks}</td>
-
-
+                                    <td>{sorting.remarks.length > 10 ? `${sorting.remarks.slice(0, 10)}...` : sorting.remarks}</td>
                                     <td><Link href={route('edit', { id: sorting.id })} className='btn btn-success btn-sm'>更新</Link></td>
                                     <td><Link
                                         href={route('delete', { id: sorting.id })}
@@ -184,7 +182,6 @@ const Index = ({ kari_names, sortings }) => {
                                     >
                                         削除
                                     </Link></td>
-                                    {/* <td><Link type="submit" href={route('edit')} className='btn btn-primary my-2' disabled={processing}>更新</Link></td> */}
                                 </tr>
                             ))}
                         </tbody>
