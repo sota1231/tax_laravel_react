@@ -75,7 +75,7 @@ export default function Login({ status, canResetPassword }) {
                             }
                         />
                         <span className="ms-2 text-sm text-gray-600">
-                            Remember me
+                            ログイン情報を記憶させますか？
                         </span>
                     </label>
                 </div>
@@ -84,15 +84,15 @@ export default function Login({ status, canResetPassword }) {
                     {canResetPassword && (
                         <Link
                             href={route('password.request')}
-                            className="rounded-md text-sm text-gray-600 underline hover:text-gray-900 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2"
+                            className="rounded-md text-sm text-gray-600 underline hover:text-gray-900 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2 pr-5"
                         >
-                            Forgot your password?
+                            パスワードをお忘れの方
                         </Link>
                     )}
                     <Link href={route('register')} className="rounded-md text-sm text-gray-600 underline hover:text-gray-900 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2">新規登録</Link>
 
                     <PrimaryButton className="ms-4" disabled={processing}>
-                        Log in
+                        ログイン
                     </PrimaryButton>
                 </div>
             </form>

@@ -27,6 +27,7 @@ class SortingContoroller extends Controller
     public function index()
     {
         $user = Auth::user();
+        // 複式簿記ユーザー
         if ($user->role == 1) {
             $kari = new KariName();
             $kari_names = $kari->kari();
@@ -42,8 +43,24 @@ class SortingContoroller extends Controller
                 ]
             ]);
 
-            //　roleが０なら管理者画面へ遷移 
-        } else {
+        // 簡易簿記ユーザー
+        } else if($user->role == 2)  {
+            $id = Auth::id();
+            $kari = new KariName();
+            $kari_names = $kari->kari();
+
+            $sorting = new Sorting();
+            $sortings = $sorting->alldata($id);
+            return Inertia::render('view/SimpleIndex', [
+                'kari_names' => $kari_names,
+                'sortings' => $sortings,
+                'flash' => [
+                    'message' => session('message')
+                ]
+            ]);
+
+        //　roleが０なら管理者画面へ遷移 
+        } else if($user->role == 0)  {
             $users = DB::table('users')->select('*')->selectRaw('DATE_FORMAT(created_at,"%Y-%m-%d") as day')->paginate(20);
             return Inertia::render('view/Manager', [
                 'users' => $users,
@@ -51,6 +68,11 @@ class SortingContoroller extends Controller
                     'message' => session('message')
                 ]
             ]);
+        }else {
+
+            // TODO:404を作成する
+            return;
+
         }
     }
     public function store(SortingRequest $request)

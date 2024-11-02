@@ -64,6 +64,7 @@ const Deduction = ({ deductions }) => {
                                 </td>
                                 <td>
                                 <FormSelect
+                                    className='form-control form-control-sm'
                                     name="role"
                                     value={data.role}
                                     onChange={(e) => setData('role', e.target.value)}

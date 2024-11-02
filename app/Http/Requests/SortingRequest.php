@@ -3,6 +3,7 @@
 namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
+use Illuminate\Support\Facades\Auth;
 
 class SortingRequest extends FormRequest
 {
@@ -21,14 +22,30 @@ class SortingRequest extends FormRequest
      */
     public function rules(): array
     {
-        return [
-            'day'=>'required',
-            'kari_name'=>'required',
-            'kari_price'=>'required',
-            'kashi_name'=>'required',
-            'kashi_price' => 'required',
-            'remarks'=>'required',
-        ];
+        $user = Auth::user();
+            if($user->role == 1){
+                return [
+                    'day'=>'required',
+                    'kari_name'=>'required',
+                    'kari_price'=>'required',
+                    'kashi_name'=>'required',
+                    'kashi_price' => 'required',
+                    'remarks'=>'required',
+                ];
+
+            } else if($user->role == 2){
+                return [
+                    'day'=>'required',
+                    'name'=>'required',
+                    'price'=>'required',
+                    'remarks'=>'required',
+                ];
+                
+            }else {
+                // 404
+            }
+
+    
     }
 
     public function messages()
@@ -36,7 +53,9 @@ class SortingRequest extends FormRequest
         return[
             'day.required'=>'この項目は必須項目です。',
             'kari_name.required'=>'この項目は必須項目です。',
+            'name.required'=>'この項目は必須項目です。',
             'kari_price.required'=>'この項目は必須項目です。',
+            'price.required'=>'この項目は必須項目です。',
             'kashi_name.required'=>'この項目は必須項目です。',
             'kashi_price.required'=>'この項目は必須項目です。',
             'remarks.required'=>'この項目は必須項目です。',

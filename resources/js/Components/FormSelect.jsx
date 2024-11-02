@@ -1,6 +1,6 @@
 import React from 'react';
 
-const FormSelect = ({ label, name, value, onChange, options, errors }) => {
+const FormSelect = ({ label, name, value, onChange, options, errors, className }) => {
     if (!Array.isArray(options)) {
         console.error('options must be an array');
         return null; // または適切なフォールバックを表示
@@ -8,7 +8,8 @@ const FormSelect = ({ label, name, value, onChange, options, errors }) => {
     return (
         <div className="box py-">
             <select
-                className='form-control form-control-sm'
+                className={className}
+                // 'form-control form-control-sm'
                 name={name}
                 value={value}
                 onChange={onChange}

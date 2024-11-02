@@ -4,6 +4,7 @@ import PrimaryButton from '@/Components/PrimaryButton';
 import TextInput from '@/Components/TextInput';
 import GuestLayout from '@/Layouts/GuestLayout';
 import { Head, Link, useForm } from '@inertiajs/react';
+import FormSelect from '@/Components/FormSelect';
 
 export default function Register() {
     const { data, setData, post, processing, errors, reset } = useForm({
@@ -11,7 +12,7 @@ export default function Register() {
         email: '',
         password: '',
         password_confirmation: '',
-        role: '1',
+        role: '',
     });
 
     const submit = (e) => {
@@ -28,7 +29,7 @@ export default function Register() {
 
             <form onSubmit={submit}>
                 <div>
-                    <InputLabel htmlFor="name" value="Name" />
+                    <InputLabel htmlFor="name" value="名前" />
 
                     <TextInput
                         id="name"
@@ -45,7 +46,7 @@ export default function Register() {
                 </div>
 
                 <div className="mt-4">
-                    <InputLabel htmlFor="email" value="Email" />
+                    <InputLabel htmlFor="email" value="メールアドレス" />
 
                     <TextInput
                         id="email"
@@ -62,7 +63,7 @@ export default function Register() {
                 </div>
 
                 <div className="mt-4">
-                    <InputLabel htmlFor="password" value="Password" />
+                    <InputLabel htmlFor="password" value="パスワード" />
 
                     <TextInput
                         id="password"
@@ -81,7 +82,7 @@ export default function Register() {
                 <div className="mt-4">
                     <InputLabel
                         htmlFor="password_confirmation"
-                        value="Confirm Password"
+                        value="パスワード確認用"
                     />
 
                     <TextInput
@@ -104,17 +105,18 @@ export default function Register() {
                 </div>
 
                 <div className="mt-4">
-                    <InputLabel htmlFor="role" value="role" />
+                    <InputLabel htmlFor="role" value="利用種別" />
 
-                    <TextInput
-                        id="role"
-                        type="number"
+                    <FormSelect
+                        className="mt-1 block w-full rounded-md border-gray-300 shadow-sm"
                         name="role"
                         value={data.role}
-                        className="mt-1 block w-full"
-                        autoComplete="new-password"
                         onChange={(e) => setData('role', e.target.value)}
-                        required
+                        options={[
+                            { value: "0", label: "管理者ユーザー" },
+                            { value: "1", label: "複式簿記ユーザー" },
+                            { value: "2", label: "簡易簿記ユーザー" }
+                        ]}
                     />
 
                     <InputError message={errors.password} className="mt-2" />
@@ -123,13 +125,13 @@ export default function Register() {
                 <div className="mt-4 flex items-center justify-end">
                     <Link
                         href={route('login')}
-                        className="rounded-md text-sm text-gray-600 underline hover:text-gray-900 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2"
+                        className="pr-5 rounded-md text-sm text-gray-600 underline hover:text-gray-900 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2"
                     >
-                        Already registered?
+                        登録されている方
                     </Link>
 
                     <PrimaryButton className="ms-4" disabled={processing}>
-                        Register
+                        登録
                     </PrimaryButton>
                 </div>
             </form>
