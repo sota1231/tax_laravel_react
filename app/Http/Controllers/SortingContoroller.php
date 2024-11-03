@@ -47,7 +47,7 @@ class SortingContoroller extends Controller
         } else if($user->role == 2)  {
             $id = Auth::id();
             $kari = new KariName();
-            $kari_names = $kari->kari();
+            $kari_names = $kari->kani_kari();
 
             $sorting = new Sorting();
             $sortings = $sorting->alldata($id);

@@ -26,9 +26,9 @@ class SortingRequest extends FormRequest
             if($user->role == 1){
                 return [
                     'day'=>'required',
-                    'kari_name'=>'required',
+                    'kari_name_id'=>'required',
                     'kari_price'=>'required',
-                    'kashi_name'=>'required',
+                    'kashi_name_id'=>'required',
                     'kashi_price' => 'required',
                     'remarks'=>'required',
                 ];
@@ -36,7 +36,8 @@ class SortingRequest extends FormRequest
             } else if($user->role == 2){
                 return [
                     'day'=>'required',
-                    'name'=>'required',
+                    'balance'=>'required',
+                    'name_id'=>'required',
                     'price'=>'required',
                     'remarks'=>'required',
                 ];
@@ -52,16 +53,17 @@ class SortingRequest extends FormRequest
     {
         return[
             'day.required'=>'この項目は必須項目です。',
-            'kari_name.required'=>'この項目は必須項目です。',
-            'name.required'=>'この項目は必須項目です。',
+            'balance.required'=>'この項目は必須項目です。',
+            'kari_name_id.required'=>'この項目は必須項目です。',
+            'name_id.required'=>'この項目は必須項目です。',
             'kari_price.required'=>'この項目は必須項目です。',
             'price.required'=>'この項目は必須項目です。',
-            'kashi_name.required'=>'この項目は必須項目です。',
+            'kashi_name_id.required'=>'この項目は必須項目です。',
             'kashi_price.required'=>'この項目は必須項目です。',
             'remarks.required'=>'この項目は必須項目です。',
             'price.required'=>'この項目は必須項目です。',
             'user_id.required'=>'この項目は必須項目です。',
-            'name.required'=>'この項目は必須項目です。',
+            'name_id.required'=>'この項目は必須項目です。',
 
             'password.required'=>'この項目は必須項目です。',
             'password.confirmed'=>'パスワードが確認用と一致しません。',

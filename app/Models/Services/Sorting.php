@@ -53,7 +53,7 @@ class Sorting extends Model
             // ->select('sum')
             ->selectRaw('sum(kari_price) as sum')
             ->where('user_id', $id, 0)
-            ->where('kari_name', '!=', '現金')
+            ->where('kari_name_id', '!=', '現金')
             // ->groupBy('kari_price')
             ->first();
     }
@@ -66,7 +66,7 @@ class Sorting extends Model
             // ->select('sum')
             ->selectRaw('sum(kashi_price) as sum')
             ->where('user_id', $id, 0)
-            ->where('kashi_name', '!=', '現金')
+            ->where('kashi_name_id', '!=', '現金')
             // ->groupBy('kashi_price')
             ->first();
     }
@@ -77,30 +77,32 @@ class Sorting extends Model
         $id = Auth::id();
         if ($user->role == 1) {
             $param = [
-                'kari_name' => $request->kari_name,
+                'kari_name_id' => $request->kari_name_id,
                 'kari_price' => $request->kari_price,
-                'kashi_name' => $request->kashi_name,
+                'kashi_name_id' => $request->kashi_name_id,
                 'kashi_price' => $request->kashi_price,
                 'remarks' => $request->remarks,
                 'day' => $request->day,
+                'balance'=>'',
                 'user_id' => $user->id,
             ];
             
         }else if ($user->role == 2) {
             $param = [
-                'kari_name' => $request->name,
+                'kari_name_id' => $request->name_id,
                 'kari_price' => $request->price,
-                'kashi_name' => $request->name,
+                'kashi_name_id' => $request->name_id,
                 'kashi_price' => $request->price,
                 'remarks' => $request->remarks,
                 'day' => $request->day,
-                'user_id' => $id,
+                'balance'=>$request->balance,
+                'user_id' => $user->id,
             ];
 
         }else {
             // 404
         }
-        DB::insert('insert into sortings (kari_name,kari_price,kashi_name,kashi_price,remarks,day,user_id) 
-                    values(:kari_name,:kari_price,:kashi_name,:kashi_price,:remarks,:day,:user_id)', $param);
+        DB::insert('insert into sortings (kari_name_id,kari_price,kashi_name_id,kashi_price,remarks,day,balance,user_id) 
+                    values(:kari_name_id,:kari_price,:kashi_name_id,:kashi_price,:remarks,:day,:balance,:user_id)', $param);
     }
 }

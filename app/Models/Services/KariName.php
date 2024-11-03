@@ -24,4 +24,11 @@ class KariName extends Model
          ->get();
          
     }
+
+    public function kani_kari(){
+        return DB::table('kari_names')
+        ->where('kinds',1)
+        ->get();
+         
+    }
 }

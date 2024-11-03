@@ -8,12 +8,12 @@ import FlashMessage from '@/Components/FlashMessage';
 
 const Index = ({ kari_names, sortings }) => {
     const { data, setData, post, processing, errors } = useForm({
-        day: '',
-        kari_name: '',
-        kari_price: '',
-        kashi_name: '',
-        kashi_price: '',
-        remarks: '',
+        day:             '',
+        kari_name_id:    '',
+        kari_price:      '',
+        kashi_name_id:   '',
+        kashi_price:     '',
+        remarks:         '',
     });
 
     const handleSubmit = (e) => {
@@ -48,15 +48,16 @@ const Index = ({ kari_names, sortings }) => {
                             </tr>
                             <tr>
                                 <td>
-                                    <label htmlFor="kari_name">借方名</label><span className="required text-danger">* </span>
-                                    {errors.kari_name && <dd className="text-danger">{errors.kari_name}</dd>}
+                                    <label htmlFor="kari_name_id">借方名</label><span className="required text-danger">* </span>
+                                    {errors.kari_name_id && <dd className="text-danger">{errors.kari_name_id}</dd>}
                                 </td>
                                 <td>
                                     <FormSelect
                                     className='form-control form-control-sm'
-                                        name="kari_name"
-                                        value={data.kari_name}
-                                        onChange={(e) => setData('kari_name', e.target.value)}
+                                        name="kari_name_id"
+                                        value={data.kari_name_id}
+                                        onChange={(e) => setData('kari_name_id', e.target.value)}
+                                        // TODO
                                         options={kari_names.map(name => ({ value: name.name, label: name.name }))}
                                     />
                                 </td>
@@ -67,9 +68,9 @@ const Index = ({ kari_names, sortings }) => {
                                 <td>
                                     <FormSelect
                                     className='form-control form-control-sm'
-                                        name="kashi_name"
-                                        value={data.kashi_name}
-                                        onChange={(e) => setData('kashi_name', e.target.value)}
+                                        name="kashi_name_id"
+                                        value={data.kashi_name_id}
+                                        onChange={(e) => setData('kashi_name_id', e.target.value)}
                                         options={kari_names.map(name => ({ value: name.name, label: name.name }))}
                                     />
                                 </td>

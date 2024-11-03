@@ -14,47 +14,67 @@ return new class extends Migration
     {
         Schema::create('kari_names', function (Blueprint $table) {
             $table->id();
+            $table->integer('kinds'); // 貸借対照表・・・０
+            $table->integer('left'); // 左になると＋になる場合・・・０
             $table->string('name');
         });
 
         $qb = DB::table('kari_names');
         $insert = [
            [
-                // 'id' => null,
+                'kinds'=> 1,
+                'left' => 1,
                 'name' => '売上げ',
            ],
            [
-                // 'id' => null,
+                'kinds'=> 0,
+                'left' => 0,
                 'name' => '現金',
            ],
            [
-                // 'id' => null,
+                'kinds'=> 1,
+                'left' => 0,
                 'name' => '水道光熱費',
            
            ],
             [
-                // 'id' => null,
+                'kinds'=> 1,
+                'left' => 0,
                 'name' => '消耗品費',
             ],
             [
+                'kinds'=> 1,
+                'left' => 0,
                 'name'=>'会議費'
             ],
             [
+                'kinds'=> 1,
+                'left' => 0,
                 'name'=>'接待交際費'
             ],
             [
+                'kinds'=> 1,
+                'left' => 0,
                 'name'=>'通信費'
             ],
             [
+                'kinds'=> 1,
+                'left' => 0,
                 'name'=>'広告宣伝費'
             ],
             [
+                'kinds'=> 1,
+                'left' => 0,
                 'name'=>'修繕費'
             ],
             [
+                'kinds'=> 1,
+                'left' => 0,
                 'name'=>'旅費交通費'
             ],
             [
+                'kinds'=> 1,
+                'left' => 0,
                 'name'=>'車両費'
             ],
 
