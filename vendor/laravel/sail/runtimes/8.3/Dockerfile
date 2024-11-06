@@ -65,6 +65,14 @@ COPY supervisord.conf /etc/supervisor/conf.d/supervisord.conf
 COPY php.ini /etc/php/8.3/cli/conf.d/99-sail.ini
 RUN chmod +x /usr/local/bin/start-container
 
+# peclのインストール
+RUN apt-get install -y php-pear
+
+RUN pecl install xdebug \
+&& docker-php-ext-enable xdebug	
+
+COPY xdebug.ini /etc/php/8.2/cli/conf.d/20-xdebug.ini
+
 EXPOSE 80/tcp
 
 ENTRYPOINT ["start-container"]

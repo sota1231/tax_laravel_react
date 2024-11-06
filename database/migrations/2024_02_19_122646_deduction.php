@@ -15,7 +15,7 @@ return new class extends Migration
         Schema::create('deductions', function (Blueprint $table) {
             $table->id();
             $table->integer('user_id');
-            $table->string('name');
+            // $table->string('name');
             $table->integer('price')->default(0);
             $table->text('remarks');
             $table->dateTime('day')->nullable();
@@ -27,14 +27,14 @@ return new class extends Migration
         $qb = DB::table('deductions');
         $insert = [
            [
-                'name' => '初期状態',
+                // 'name' => '初期状態',
                 'price'=>0,
                 'remarks'=>'初期状態',
                 'user_id'=>0,
                 'role'=>0,
            ],
            [
-                'name' => '初期状態',
+                // 'name' => '初期状態',
                 'price'=>0,
                 'remarks'=>'初期状態',
                 'user_id'=>0,

@@ -43,8 +43,8 @@ class SortingContoroller extends Controller
                 ]
             ]);
 
-        // 簡易簿記ユーザー
-        } else if($user->role == 2)  {
+            // 簡易簿記ユーザー
+        } else if ($user->role == 2) {
             $id = Auth::id();
             $kari = new KariName();
             $kari_names = $kari->kani_kari();
@@ -59,8 +59,8 @@ class SortingContoroller extends Controller
                 ]
             ]);
 
-        //　roleが０なら管理者画面へ遷移 
-        } else if($user->role == 0)  {
+            //　roleが０なら管理者画面へ遷移 
+        } else if ($user->role == 0) {
             $users = DB::table('users')->select('*')->selectRaw('DATE_FORMAT(created_at,"%Y-%m-%d") as day')->paginate(20);
             return Inertia::render('view/Manager', [
                 'users' => $users,
@@ -68,11 +68,10 @@ class SortingContoroller extends Controller
                     'message' => session('message')
                 ]
             ]);
-        }else {
+        } else {
 
             // TODO:404を作成する
             return;
-
         }
     }
     public function store(SortingRequest $request)
@@ -85,11 +84,12 @@ class SortingContoroller extends Controller
     // 控除登録画面 ====================================
     public function deduction()
     {
-        $id = Auth::id();
+        $user = Auth::user();
         $deduction = new Deduction();
-        $deductions = $deduction->alldata($id);
+        $deductions = $deduction->alldata($user->id);
         return Inertia::render('kino/Deduction', [
             'deductions' => $deductions,
+            'user' => $user,
             'flash' => [
                 'message' => session('message')
             ]
@@ -125,16 +125,26 @@ class SortingContoroller extends Controller
     //  
     public function tax()
     {
-        // sortingのuser_idとnameが売上げのデータの合計
-        // TODO:Authの機能を追加する
-        $id = Auth::id();
-        // $id = 1;
+        $user = Auth::user();
+        $id = $user->id;
         $sorting = new Sorting();
-        $kari = $sorting->sumPrice($id);
-        // sortingのuser_idとnameが消耗品、、、、のデータの合計
-        $kashis = new Sorting();
-        $kashi = $kashis->sumKashiPrice($id);
 
+        if ($user->role == 1) {
+
+            $sales_kari  = $sorting->sumKarisales($id);   // 借方の売上げ合計
+            $sales_kashi = $sorting->sumKashiSales($id);
+            $sales = ($sales_kari? $sales_kari->sumKari : 0) - ($sales_kashi? $sales_kashi->sumKashi:0);
+            // $sales = $saleses->sumKari - $saleses->sumKashi;
+            // dd($saleses);
+            $costs = $sorting->sumFukuCost($id);     // 貸方、借方の経費の合計
+            $cost  = $costs->sumKashi - $costs->sumKari;
+
+        } else if ($user->role == 2) {
+
+            $sales = $sorting->sumSales($id); // 売上げの合計
+            $cost  = $sorting->sumCost($id); // 経費の合計
+
+        }
         // kyuyoのuser_idとnameがpriceの合計
         $kyuyos = new Kyuyo();
         $kyuyo = $kyuyos->sumKyuyo($id);
@@ -147,8 +157,6 @@ class SortingContoroller extends Controller
         $deductions1 = new Deduction();
         $deduction1 = $deductions1->sumRole1($id);
 
-
-
-        return Inertia::render('kino/Tax', ['kashi' => $kashi, 'kari' => $kari, 'deduction' => $deduction, 'deduction1' => $deduction1, 'kyuyo' => $kyuyo]);
+        return Inertia::render('kino/Tax', ['sales' => $sales, 'cost' => $cost, 'deduction' => $deduction, 'deduction1' => $deduction1, 'kyuyo' => $kyuyo, 'user' => $user]);
     }
 }

@@ -14,6 +14,7 @@ const Index = ({ kari_names, sortings }) => {
         kashi_name_id:   '',
         kashi_price:     '',
         remarks:         '',
+
     });
 
     const handleSubmit = (e) => {
@@ -58,12 +59,12 @@ const Index = ({ kari_names, sortings }) => {
                                         value={data.kari_name_id}
                                         onChange={(e) => setData('kari_name_id', e.target.value)}
                                         // TODO
-                                        options={kari_names.map(name => ({ value: name.name, label: name.name }))}
+                                        options={kari_names.map(name => ({ value: name.id, label: name.name }))}
                                     />
                                 </td>
                                 <td>
                                     <label htmlFor="kashi_name">貸方名</label><span className="required text-danger">* </span>
-                                    {errors.kashi_name && <dd className="text-danger">{errors.kashi_name}</dd>}
+                                    {errors.kashi_name_id && <dd className="text-danger">{errors.kashi_name_id}</dd>}
                                 </td>
                                 <td>
                                     <FormSelect
@@ -71,7 +72,7 @@ const Index = ({ kari_names, sortings }) => {
                                         name="kashi_name_id"
                                         value={data.kashi_name_id}
                                         onChange={(e) => setData('kashi_name_id', e.target.value)}
-                                        options={kari_names.map(name => ({ value: name.name, label: name.name }))}
+                                        options={kari_names.map(name => ({ value: name.id, label: name.name }))}
                                     />
                                 </td>
                             </tr>
@@ -167,9 +168,9 @@ const Index = ({ kari_names, sortings }) => {
                                 <tr key={index}>
                                     <td>{index + 1}</td>
                                     <td>{sorting.date}</td>
-                                    <td>{sorting.kari_name.length > 10 ? `${sorting.kari_name.slice(0, 10)}...` : sorting.kari_name}</td>
+                                    <td>{kari_names.find(name => name.id === sorting.kari_name_id)?.name}</td>
                                     <td>{sorting.kari_price}</td>
-                                    <td>{sorting.kashi_name.length > 10 ? `${sorting.kashi_name.slice(0, 10)}...` : sorting.kashi_name}</td>
+                                    <td>{kari_names.find(name => name.id === sorting.kashi_name_id)?.name}</td>
                                     <td>{sorting.kashi_price}</td>
                                     <td>{sorting.remarks.length > 10 ? `${sorting.remarks.slice(0, 10)}...` : sorting.remarks}</td>
                                     <td><Link href={route('edit', { id: sorting.id })} className='btn btn-success btn-sm'>更新</Link></td>

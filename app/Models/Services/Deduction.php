@@ -46,21 +46,18 @@ class Deduction extends Model
     // 通常控除
     public function sumRole0($id){
         return DB::table('deductions')
-        // ->select('sum')
         ->selectRaw('sum(price) as sum')
-        ->where('user_id',$id,0)
-        ->where('role',0)
-        // ->groupBy('price')
+        ->where('user_id', $id, 0)
+        ->where('role', 0)
         ->first();
     }
 
-    // role1が１
+    // roleが１ 事業所得控除
     public function sumRole1($id){
         return DB::table('deductions')
-        // ->select('sum')
         ->selectRaw('sum(price) as sum')
-        ->where('user_id',$id,0)
-        ->where('role',1)
+        ->where('user_id', $id, 0)
+        ->where('role', 1)
         // ->groupBy('price')
         ->first();
     }
@@ -69,14 +66,13 @@ class Deduction extends Model
     public function register($request){
         $id = Auth::id();
         $param = [
-            'name'=>$request->name,
             'price' => $request->price,
             'remarks'=>$request->remarks,
             'day'=>$request->day,
             'role'=>$request->role,
             'user_id'=>$id
         ];
-        DB::insert('insert into deductions (name,price,remarks,day,role,user_id) 
-                    values(:name,:price,:remarks,:day,:role,:user_id)',$param);
+        DB::insert('insert into deductions (price,remarks,day,role,user_id) 
+                    values(:price,:remarks,:day,:role,:user_id)',$param);
     }
 }

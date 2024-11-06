@@ -20,7 +20,13 @@
 	},
 	"remoteUser": "sail",
 	"postCreateCommand": "chown -R 1000:1000 /var/www/html 2>/dev/null || true"
-	// "forwardPorts": [],
+    "forwardPorts": [9003],
 	// "runServices": [],
 	// "shutdownAction": "none",
+	"extensions": [
+		"xdebug.php-debug",
+		"bmewburn.vscode-intelephense-client",
+		"oderwat.indent-rainbow",
+		"streetsidesoftware.code-spell-checker"
+	]
 }

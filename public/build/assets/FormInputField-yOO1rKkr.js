@@ -1,0 +1,1 @@
+import{j as r}from"./app-CZ1frffn.js";const c=({name:o,type:t,value:s,onChange:m,placeholder:n,error:e})=>r.jsx(r.Fragment,{children:r.jsx("input",{className:"form-control form-control-sm",type:t,name:o,id:o,value:s,onChange:m,placeholder:n})});export{c as F};

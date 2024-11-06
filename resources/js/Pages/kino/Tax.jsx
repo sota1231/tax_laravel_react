@@ -1,8 +1,10 @@
 import React from 'react';
 import HeaderLayout from '@/Layouts/Header.Layout';
 // import Layout1 from '../../Layouts/Layout1';
+import { usePage } from '@inertiajs/react'
 
-const Tax = ({ kashi, kari, deduction1, kyuyo, deduction }) => {
+
+const Tax = ({ sales, cost, deduction1, kyuyo, deduction, user }) => {
   return (
     <HeaderLayout className="bg-primary text-bg-primary">
       <div className="container px-5">
@@ -13,7 +15,7 @@ const Tax = ({ kashi, kari, deduction1, kyuyo, deduction }) => {
               <tbody>
                 <tr>
                   <td className="label fs-4 text-primary fw-bold">事業課税所得：</td>
-                  <td className="value text-end fs-4">{Math.max((kashi?.sum || 0) - (kari?.sum || 0) - (deduction1?.sum || 0), 0)}</td>
+                  <td className="value text-end fs-4">{ Math.max((sales?.sum || 0) - (cost?.sum || 0) - (deduction1?.sum || 0), 0 )}</td>
                 </tr>
                 <tr>
                   <td className="label fs-4 text-success fw-bold">給与課税所得：</td>
@@ -27,7 +29,7 @@ const Tax = ({ kashi, kari, deduction1, kyuyo, deduction }) => {
                   <td className="label fs-4 text-danger fw-bold">課税所得：</td>
                   <td className="value text-end fw-bold fs-3">
                     {Math.max(
-                      Math.max((kashi?.sum || 0) - (kari?.sum || 0) - (deduction1?.sum || 0), 0) +
+                      Math.max((sales?.sum || 0) - (cost?.sum || 0) - (deduction1?.sum || 0), 0) +
                       Math.max((kyuyo?.sum || 0) - 650000, 0) -
                       ((deduction?.sum || 0) + 480000),
                       0
@@ -47,10 +49,14 @@ const Tax = ({ kashi, kari, deduction1, kyuyo, deduction }) => {
               </div>
               <div className="card-body">
                 <p className="card-text">
-                  <span className="fw-bold">売上：</span> {kashi?.sum || 0}<br/>
-                  <span className="fw-bold">経費：</span> -{kari?.sum || 0}<br/>
-                  <span className="fw-bold">青色申告特別控除：</span> -{deduction1?.sum || 0}<br/>
-                  <span className="fw-bold text-primary fs-4">合計：</span><span className='fs-4'>{Math.max((kashi?.sum || 0) - (kari?.sum || 0) - (deduction1?.sum || 0), 0)}</span>
+                  <span className="fw-bold">売上：</span> { sales?.sum || 0}<br/>
+                  <span className="fw-bold">経費：</span>  {cost?.sum || 0}<br/>
+                  {user?.role !== 2 && (
+                    <>
+                      <span className="fw-bold">青色申告特別控除：</span> -{deduction1?.sum || 0}<br/>
+                    </>
+                  )}
+                  <span className="fw-bold text-primary fs-4">合計：</span><span className='fs-4'>{Math.max((sales?.sum || 0) - (cost?.sum || 0) - (deduction1?.sum || 0), 0)}</span>
                 </p>
               </div>
             </div>
@@ -76,7 +82,7 @@ const Tax = ({ kashi, kari, deduction1, kyuyo, deduction }) => {
               </div>
               <div className="card-body">
                 <p className="card-text">
-                  <span className="fw-bold">控除額：</span> {Number(deduction?.sum || 0).toLocaleString()}<br/>
+                  <span className="fw-bold">控除額(保険など)：</span> {Number(deduction?.sum || 0).toLocaleString()}<br/>
                   <span className="fw-bold">基礎控除：</span> {Number(480000).toLocaleString()}<br/>
                   <span className="fw-bold text-danger fs-4">合計：</span><span className='fs-4'>{(Number(deduction?.sum || 0) + 480000).toLocaleString()}</span>
                 </p>
@@ -85,7 +91,6 @@ const Tax = ({ kashi, kari, deduction1, kyuyo, deduction }) => {
           </div>
         </div>
         
-
         
       </div>
     </HeaderLayout>

@@ -7,10 +7,9 @@ import FlashMessage from '@/Components/FlashMessage';
 // import { Inertia } from '@inertiajs/inertia';
 
 const Deduction = ({ deductions }) => {
-    const { data, setData, post, processing, errors } = useForm({
+    const { data, setData, post, processing, errors, user } = useForm({
         user_id: '', // ユーザーIDを適切に設定する必要があります
         day: '',
-        name: '',
         role: '',
         price: '',
         remarks: ''
@@ -46,15 +45,16 @@ const Deduction = ({ deductions }) => {
                             </tr>
                             <tr>
                                 <td>
-                                    <label htmlFor="name">控除名</label><span className="required text-danger">*</span>
-                                    {errors.name && <dd className="text-danger">{errors.name}</dd>}
+                                    <label htmlFor="remarks">控除名</label><span className="required text-danger">*</span>
+                                    {errors.remarks && <dd className="text-danger">{errors.remarks}</dd>}
                                 </td>
                                 <td>
                                     <FormInputField
                                         type="text"
-                                        name="name"
-                                        value={data.name}
-                                        onChange={(e) => setData('name', e.target.value)}
+                                        name="remarks"
+                                        placeholder="1月分国民健康保険"
+                                        value={data.remarks}
+                                        onChange={(e) => setData('remarks', e.target.value)}
                                     />
                                 </td>
                             </tr>
@@ -68,7 +68,9 @@ const Deduction = ({ deductions }) => {
                                     name="role"
                                     value={data.role}
                                     onChange={(e) => setData('role', e.target.value)}
-                                    options={[
+                                    options={user?.role !== 2 ? [
+                                        { value: "0", label: "通常の控除（社会保険料控除や扶養控除）" }
+                                    ] : [
                                         { value: "0", label: "通常の控除（社会保険料控除や扶養控除）" },
                                         { value: "1", label: "事業所得控除（青色申告してる方）" }
                                     ]}
@@ -91,21 +93,7 @@ const Deduction = ({ deductions }) => {
                                     />
                                 </td>
                             </tr>
-                            <tr>
-                                <td>
-                                    <label htmlFor="remarks">備考</label><span className="required text-danger">*</span>
-                                    {errors.remarks && <dd className="text-danger">{errors.remarks}</dd>}
-                                </td>
-                                <td>
-                                    <FormInputField
-                                        type="text"
-                                        name="remarks"
-                                        placeholder="備考を入力"
-                                        value={data.remarks}
-                                        onChange={(e) => setData('remarks', e.target.value)}
-                                    />
-                                </td>
-                            </tr>
+                            
                         </tbody>
                     </table>
                     <button type="submit" className='btn btn-primary px-4' disabled={processing}>送信</button>
@@ -131,17 +119,15 @@ const Deduction = ({ deductions }) => {
                                 <th className='bg-success-subtle'>控除名</th>
                                 <th className='bg-success-subtle'>控除種類</th>
                                 <th className='bg-success-subtle'>金額</th>
-                                <th className='bg-success-subtle'>備考</th>
                             </tr>
                         </thead>
                         <tbody>
                             {deductions.data.map((deduction, index) => (
                                 <tr key={index}>
                                     <td>{deduction.date}</td>
-                                    <td>{deduction.name.length > 10 ? `${deduction.name.slice(0, 10)}...` : deduction.name}</td>
+                                    <td>{deduction.remarks.length > 10 ? `${deduction.remarks.slice(0, 10)}...` : deduction.remarks}</td>
                                     <td>{deduction.role === 0 ? '通常の控除' : '事業所得控除'}</td>
                                     <td>{deduction.price}</td>
-                                    <td>{deduction.remarks.length > 10 ? `${deduction.remarks.slice(0, 10)}...` : deduction.remarks}</td>
                                     <td><Link href={route('deduction_edit', { id: deduction.id })} className='btn btn-success btn-sm'>更新</Link></td>
                                     <td>
                                         <Link

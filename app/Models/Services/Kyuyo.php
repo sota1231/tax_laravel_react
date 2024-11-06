@@ -49,7 +49,7 @@ class Kyuyo extends Model
     public function sumKyuyo($id){
         return DB::table('kyuyos')
         ->selectRaw('sum(price) as sum')
-        ->where('user_id',$id,0)
+        ->where('user_id', $id, 0)
         // ->groupBy('price')
         ->first();
     }

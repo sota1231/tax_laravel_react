@@ -24,7 +24,7 @@ class DeductionRequest extends FormRequest
         return [
             'day'=>'required',
             'remarks'=>'required',
-            'name'=>'required',
+            // 'name'=>'required',
             'role'=>'required',
             'price' => 'required',
             // 'user_id'=>'required'

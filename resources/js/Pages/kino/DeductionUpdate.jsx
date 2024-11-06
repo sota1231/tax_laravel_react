@@ -10,7 +10,6 @@ const DeductionUpdate = ({ deductions, errors }) => {
         id: deductions.id,
         user_id: deductions.user_id,
         day: deductions.date,
-        name: deductions.name,
         role: deductions.role,
         price: deductions.price,
         remarks: deductions.remarks
@@ -48,15 +47,16 @@ const DeductionUpdate = ({ deductions, errors }) => {
                             </tr>
                             <tr>
                                 <td>
-                                    <label htmlFor="name">控除名</label><span className="required text-danger">*</span>
-                                    {errors.name && <dd className="text-danger">{errors.name}</dd>}
+                                    <label htmlFor="remarks">控除名</label><span className="required text-danger">*</span>
+                                    {errors.remarks && <dd className="text-danger">{errors.remarks}</dd>}
                                 </td>
                                 <td>
                                     <FormInputField
                                         type="text"
-                                        name="name"
-                                        value={data.name}
-                                        onChange={(e) => setData('name', e.target.value)}
+                                        name="remarks"
+                                        placeholder="1月分国民健康保険"
+                                        value={data.remarks}
+                                        onChange={(e) => setData('remarks', e.target.value)}
                                     />
                                 </td>
                             </tr>
@@ -69,7 +69,9 @@ const DeductionUpdate = ({ deductions, errors }) => {
                                         name="role"
                                         value={data.role}
                                         onChange={(e) => setData('role', e.target.value)}
-                                        options={[
+                                        options={user?.role !== 2 ? [
+                                            { value: "0", label: "通常の控除（社会保険料控除や扶養控除）" }
+                                        ] : [
                                             { value: "0", label: "通常の控除（社会保険料控除や扶養控除）" },
                                             { value: "1", label: "事業所得控除（青色申告してる方）" }
                                         ]}
@@ -91,21 +93,7 @@ const DeductionUpdate = ({ deductions, errors }) => {
                                     />
                                 </td>
                             </tr>
-                            <tr>
-                                <td>
-                                    <label htmlFor="remarks">備考</label><span className="required text-danger">*</span>
-                                    {errors.remarks && <dd className="text-danger">{errors.remarks}</dd>}
-                                </td>
-                                <td>
-                                    <FormInputField
-                                        type="text"
-                                        name="remarks"
-                                        placeholder="備考を入力"
-                                        value={data.remarks}
-                                        onChange={(e) => setData('remarks', e.target.value)}
-                                    />
-                                </td>
-                            </tr>
+                            
                         </tbody>
                     </table>
                     <button className="btn btn-success px-4" type="submit" disabled={processing}>編集</button>

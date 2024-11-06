@@ -20,14 +20,14 @@ class KariName extends Model
 
     public function kari(){
         return DB::table('kari_names')
-         ->select('id','name')
+         ->select('id', 'name')
          ->get();
          
     }
 
     public function kani_kari(){
         return DB::table('kari_names')
-        ->where('kinds',1)
+        ->where('kinds', 1)
         ->get();
          
     }

@@ -63,7 +63,7 @@ export default function Register() {
                 </div>
 
                 <div className="mt-4">
-                    <InputLabel htmlFor="password" value="パスワード" />
+                    <InputLabel htmlFor="password" value="パスワード(8桁以上)" />
 
                     <TextInput
                         id="password"
