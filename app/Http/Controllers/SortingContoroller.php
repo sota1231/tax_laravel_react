@@ -129,21 +129,25 @@ class SortingContoroller extends Controller
         $id = $user->id;
         $sorting = new Sorting();
 
+        // 複式簿記ユーザーの事業所得の計算
         if ($user->role == 1) {
 
+            // 売上げ合計
             $sales_kari  = $sorting->sumKarisales($id);   // 借方の売上げ合計
-            $sales_kashi = $sorting->sumKashiSales($id);
-            $sales = ($sales_kari? $sales_kari->sumKari : 0) - ($sales_kashi? $sales_kashi->sumKashi:0);
-            // $sales = $saleses->sumKari - $saleses->sumKashi;
-            // dd($saleses);
-            $costs = $sorting->sumFukuCost($id);     // 貸方、借方の経費の合計
-            $cost  = $costs->sumKashi - $costs->sumKari;
-
+            $sales_kashi = $sorting->sumKashiSales($id);  // 貸方の売上げ合計
+            $sales = ($sales_kashi? $sales_kashi->sumKashi : 0) - ($sales_kari? $sales_kari->sumKari : 0);
+            // 経費合計
+            $cost_kari  = $sorting->sumKariCost($id);   // 借方の経費合計
+            $cost_kashi = $sorting->sumKashiCost($id);  // 貸方の経費合計
+            $cost = ($cost_kari? $cost_kari->sumKari : 0) - ($cost_kashi? $cost_kashi->sumKashi : 0);
+        
+        // 簡易簿記ユーザーの事業所得の計算
         } else if ($user->role == 2) {
 
-            $sales = $sorting->sumSales($id); // 売上げの合計
-            $cost  = $sorting->sumCost($id); // 経費の合計
-
+            $sales_sum = $sorting->sumSales($id); // 売上げの合計
+            $sales = $sales_sum->sum;
+            $cost_sum = $sorting->sumCost($id); // 経費の合計
+            $cost  = $cost_sum->sum;
         }
         // kyuyoのuser_idとnameがpriceの合計
         $kyuyos = new Kyuyo();

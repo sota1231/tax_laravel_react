@@ -78,7 +78,7 @@ class Sorting extends Model
     {
         return DB::table('sortings')
             ->selectRaw('COALESCE(sum(kashi_price), 0) as sumKashi')
-            ->join('kari_names','sortings.kari_name_id','kari_names.id')
+            ->join('kari_names','sortings.kashi_name_id','kari_names.id')
             ->where('user_id', $id, 0)
             // ->where('sortings.kari_name_id', 1)
             ->where('kari_names.kinds', 1)
@@ -87,7 +87,8 @@ class Sorting extends Model
             ->first();
     }
 
-    // 借方の経費と貸方の経費
+    // 借方の経費と貸方の経費 
+    // 使わない
     public function sumFukuCost($id)
     {
         return DB::table('sortings')
@@ -96,6 +97,31 @@ class Sorting extends Model
             ->where('user_id', $id, 0)
             ->where('kari_names.kinds', 1)
             ->where('kari_names.left', 0)
+            ->first();
+    }
+    // 借方経費合計
+    public function sumKariCost($id)
+    {
+        return DB::table('sortings')
+            ->selectRaw('COALESCE(sum(kari_price), 0) as sumKari')
+            ->join('kari_names','sortings.kari_name_id','kari_names.id')
+            ->where('user_id', $id, 0)
+            // ->where('sortings.kari_name_id', 1)
+            ->where('kari_names.kinds', 1)
+            ->where('kari_names.left', 0)
+            ->groupBy('sortings.kari_name_id')
+            ->first();
+    }
+    public function sumKashiCost($id)
+    {
+        return DB::table('sortings')
+            ->selectRaw('COALESCE(sum(kashi_price), 0) as sumKashi')
+            ->join('kari_names','sortings.kashi_name_id','kari_names.id')
+            ->where('user_id', $id, 0)
+            // ->where('sortings.kari_name_id', 1)
+            ->where('kari_names.kinds', 1)
+            ->where('kari_names.left', 0)
+            ->groupBy('sortings.kashi_name_id')
             ->first();
     }
 

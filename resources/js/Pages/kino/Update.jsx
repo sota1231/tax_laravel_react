@@ -9,9 +9,9 @@ const Update = ({ sortings, kari_names }) => {
         id: sortings.id,
         user_id: sortings.user_id,
         day: sortings.date,
-        kari_name: sortings.kari_name,
+        kari_name_id: sortings.kari_name_id,
         kari_price: sortings.kari_price,
-        kashi_name: sortings.kashi_name,
+        kashi_name_id: sortings.kashi_name_id,
         kashi_price: sortings.kashi_price,
         remarks: sortings.remarks
     });
@@ -20,6 +20,8 @@ const Update = ({ sortings, kari_names }) => {
         e.preventDefault();
         post(route('update'));
     };
+
+    console.log(sortings)
 
     return (
         <HeaderLayout className="bg-success text-bg-success">
@@ -48,15 +50,16 @@ const Update = ({ sortings, kari_names }) => {
                             </tr>
                             <tr>
                                 <td>
-                                    <label htmlFor="kari_name">借方名</label><span className="required text-danger">* </span>
-                                    {errors.kari_name && <dd className="text-danger">{errors.kari_name}</dd>}
+                                    <label htmlFor="kari_name_id">借方名</label><span className="required text-danger">* </span>
+                                    {errors.kari_name_id && <dd className="text-danger">{errors.kari_name_id}</dd>}
                                 </td>
                                 <td>
                                     <FormSelect
-                                        name="kari_name"
-                                        value={data.kari_name}
-                                        onChange={(e) => setData('kari_name', e.target.value)}
-                                        options={kari_names.map(name => ({ value: name.name, label: name.name }))}
+                                        className='form-control form-control-sm'
+                                        name="kari_name_id"
+                                        value={data.kari_name_id}
+                                        onChange={(e) => setData('kari_name_id', e.target.value)}
+                                        options={kari_names.map(name => ({ value: name.id, label: name.name }))}
                                     />
                                 </td>
                                 <td>
@@ -65,10 +68,11 @@ const Update = ({ sortings, kari_names }) => {
                                 </td>
                                 <td>
                                     <FormSelect
-                                        name="kashi_name"
-                                        value={data.kashi_name}
-                                        onChange={(e) => setData('kashi_name', e.target.value)}
-                                        options={kari_names.map(name => ({ value: name.name, label: name.name }))}
+                                        className='form-control form-control-sm'
+                                        name="kashi_name_id"
+                                        value={data.kashi_name_id}
+                                        onChange={(e) => setData('kashi_name_id', e.target.value)}
+                                        options={kari_names.map(name => ({ value: name.id, label: name.name }))}
                                     />
                                 </td>
                             </tr>

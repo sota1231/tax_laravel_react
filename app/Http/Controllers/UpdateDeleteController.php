@@ -31,9 +31,9 @@ class UpdateDeleteController extends Controller
     public function update(SortingRequest $request){
         $param = [
             'id'=>$request->id,
-            'kari_name' => $request->kari_name,
+            'kari_name_id' => $request->kari_name_id,
             'kari_price'=>$request->kari_price,
-            'kashi_name'=>$request->kashi_name,
+            'kashi_name_id'=>$request->kashi_name_id,
             'kashi_price'=>$request->kashi_price,
             'day'=>$request->day,
             'remarks'=>$request->remarks,
@@ -41,9 +41,9 @@ class UpdateDeleteController extends Controller
         ];
         
         DB::update('update sortings set 
-                kari_name =:kari_name, 
+                kari_name_id =:kari_name_id, 
                 kari_price =:kari_price, 
-                kashi_name =:kashi_name,
+                kashi_name_id =:kashi_name_id,
                 kashi_price=:kashi_price,
                 day =:day,
                 remarks =:remarks,
