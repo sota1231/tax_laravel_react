@@ -15,6 +15,26 @@ const SimpleIndex = ({ kari_names, sortings }) => {
         remarks: '',
     });
 
+    // 収入・支出で分類を分けるための関数
+    const getFilteredNames = () => {
+        if (data.balance === '') return [];
+        
+        // data.balanceが0（収入）の時はleft=1のデータ
+        // data.balanceが1（支出）の時はleft=0のデータ
+        return kari_names.filter(name => 
+            name.left === (data.balance === 0 ? 1 : 0)
+        );
+    };
+
+    // balanceが変更された時にname_idをリセット
+    const handleBalanceChange = (value) => {
+        setData(data => ({
+            ...data,           // 1. 既存のデータを展開
+            balance: value,    // 2. balanceを更新
+            name_id: ''        // 3. name_idをリセット
+        }));
+    };
+
     const handleSubmit = (e) => {
         e.preventDefault();
         post(route('sorting'));
@@ -32,7 +52,7 @@ const SimpleIndex = ({ kari_names, sortings }) => {
                         <button 
                             type="button" 
                             className={`text-bold btn ${data.balance === 0 ? 'btn-warning' : 'btn-outline-warning'}`}
-                            onClick={() => setData('balance', 0)}
+                            onClick={() =>  handleBalanceChange(0)}
                         >
                             収入
                         </button>
@@ -74,7 +94,8 @@ const SimpleIndex = ({ kari_names, sortings }) => {
                                         name="name_id"
                                         value={data.name_id}
                                         onChange={(e) => setData('name_id', e.target.value)}
-                                        options={kari_names.map(name => ({ value: name.id, label: name.name }))}
+                                        // options={kari_names.map(name => ({ value: name.id, label: name.name }))}
+                                        options={getFilteredNames().map(name => ({ value: name.id, label: name.name }))}
                                     />
                                 </td>
                             </tr>

@@ -74,6 +74,6 @@ RUN apt-get install -y php-pear
 # COPY xdebug.ini /etc/php/8.2/cli/conf.d/20-xdebug.ini
 
 EXPOSE 80/tcp
-EXPOSE 5173
+EXPOSE 5175
 
 ENTRYPOINT ["start-container"]

@@ -27,13 +27,12 @@ class SortingContoroller extends Controller
     public function index()
     {
         $user = Auth::user();
+        $sorting = new Sorting();
+        $kari = new KariName();
         // 複式簿記ユーザー
         if ($user->role == 1) {
-            $kari = new KariName();
             $kari_names = $kari->kari();
-
             $id = Auth::id();
-            $sorting = new Sorting();
             $sortings = $sorting->alldata($id);
             return Inertia::render('view/Index', [
                 'kari_names' => $kari_names,
@@ -46,7 +45,6 @@ class SortingContoroller extends Controller
             // 簡易簿記ユーザー
         } else if ($user->role == 2) {
             $id = Auth::id();
-            $kari = new KariName();
             $kari_names = $kari->kani_kari();
 
             $sorting = new Sorting();

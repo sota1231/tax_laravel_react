@@ -24,12 +24,13 @@ class SortingRequest extends FormRequest
     {
         $user = Auth::user();
             if($user->role == 1){
+                
                 return [
                     'day'=>'required',
                     'kari_name_id'=>'required',
-                    'kari_price'=>'required',
+                    'kari_price'=>'required|same:kashi_price',
                     'kashi_name_id'=>'required',
-                    'kashi_price' => 'required',
+                    'kashi_price' => 'required|same:kashi_price',
                     'remarks'=>'required',
                 ];
 
@@ -58,6 +59,7 @@ class SortingRequest extends FormRequest
             'name_id.required'=>'この項目は必須項目です。',
             'kari_price.required'=>'この項目は必須項目です。',
             'price.required'=>'この項目は必須項目です。',
+            'kari_price'=>'借方と貸方の金額が一致しません',
             'kashi_name_id.required'=>'この項目は必須項目です。',
             'kashi_price.required'=>'この項目は必須項目です。',
             'remarks.required'=>'この項目は必須項目です。',
