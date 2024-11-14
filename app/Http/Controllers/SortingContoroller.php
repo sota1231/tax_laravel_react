@@ -129,7 +129,6 @@ class SortingContoroller extends Controller
 
         // 複式簿記ユーザーの事業所得の計算
         if ($user->role == 1) {
-
             // 売上げ合計
             $sales_kari  = $sorting->sumKarisales($id);   // 借方の売上げ合計
             $sales_kashi = $sorting->sumKashiSales($id);  // 貸方の売上げ合計
@@ -141,7 +140,6 @@ class SortingContoroller extends Controller
         
         // 簡易簿記ユーザーの事業所得の計算
         } else if ($user->role == 2) {
-
             $sales_sum = $sorting->sumSales($id); // 売上げの合計
             $sales = $sales_sum->sum;
             $cost_sum = $sorting->sumCost($id); // 経費の合計

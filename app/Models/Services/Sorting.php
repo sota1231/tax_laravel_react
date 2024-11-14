@@ -48,20 +48,6 @@ class Sorting extends Model
     // 複式簿記　TAX＝＝＝＝＝
     //（借方の売上げー貸方売上げ）ー（貸方の経費ー借方の経費）
     // 借方の売上げと貸方の売上げ
-    // TODO:合計が合わない
-    public function sumFukuSales($id)
-    {
-        return DB::table('sortings')
-            ->selectRaw('sum(kari_price) as sumKari, sum(kashi_price) as sumKashi')
-            ->join('kari_names','sortings.kari_name_id','kari_names.id')
-            ->where('user_id', $id, 0)
-            // ->where('sortings.kari_name_id', 1)
-            ->where('kari_names.kinds', 1)
-            ->where('kari_names.left', 1)
-            ->groupBy('sortings.kari_name_id')
-            ->get();
-    }
-
     public function sumKariSales($id)
     {
         return DB::table('sortings')
@@ -88,17 +74,6 @@ class Sorting extends Model
     }
 
     // 借方の経費と貸方の経費 
-    // 使わない
-    public function sumFukuCost($id)
-    {
-        return DB::table('sortings')
-            ->selectRaw('sum(kari_price) as sumKari, sum(kashi_price) as sumKashi')
-            ->join('kari_names','sortings.kari_name_id','kari_names.id')
-            ->where('user_id', $id, 0)
-            ->where('kari_names.kinds', 1)
-            ->where('kari_names.left', 0)
-            ->first();
-    }
     // 借方経費合計
     public function sumKariCost($id)
     {
@@ -109,7 +84,8 @@ class Sorting extends Model
             // ->where('sortings.kari_name_id', 1)
             ->where('kari_names.kinds', 1)
             ->where('kari_names.left', 0)
-            ->groupBy('sortings.kari_name_id')
+            // ->groupBy('sortings.kari_name_id')
+            ->groupBy('kari_names.kinds')
             ->first();
     }
     public function sumKashiCost($id)
@@ -121,7 +97,8 @@ class Sorting extends Model
             // ->where('sortings.kari_name_id', 1)
             ->where('kari_names.kinds', 1)
             ->where('kari_names.left', 0)
-            ->groupBy('sortings.kashi_name_id')
+            ->groupBy('kari_names.kinds')
+            // ->groupBy('sortings.kashi_name_id')
             ->first();
     }
 

@@ -36,8 +36,10 @@ class Deduction extends Model
 
 	protected $fillable = [
 		'user_id',
-		'name',
-		'price',
+		'kari_name_id',
+		'kari_price',
+		'kashi_name_id',
+		'kashi_price',
 		'remarks',
 		'day',
 		'role'

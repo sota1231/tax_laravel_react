@@ -16,7 +16,7 @@ const Tax = ({ sales, cost, deduction1, kyuyo, deduction, user }) => {
                 <tr>
                   <td className="label fs-4 text-primary fw-bold">事業課税所得：</td>
                   {/* <td className="value text-end fs-4">{ Math.max((sales?.sum || 0) - (cost?.sum || 0) - (deduction1?.sum || 0), 0 )}</td> */}
-                  <td className="value text-end fs-4">{ Math.max((sales || 0) - (cost || 0) - (deduction1?.sum || 0), 0 )}</td>
+                  <td className="value text-end fs-4">{ Math.max((sales<0? 0:sales || 0) - (cost<0? 0:cost || 0) - (deduction1?.sum || 0), 0 )}</td>
                 </tr>
                 <tr>
                   <td className="label fs-4 text-success fw-bold">給与課税所得：</td>
@@ -36,7 +36,7 @@ const Tax = ({ sales, cost, deduction1, kyuyo, deduction, user }) => {
                       0
                     )} */}
                     {Math.max(
-                      Math.max((sales || 0) - (cost || 0) - (deduction1?.sum || 0), 0) +
+                      Math.max((sales<0? 0:sales || 0) - (cost<0? 0:cost || 0) - (deduction1?.sum || 0), 0) +
                       Math.max((kyuyo?.sum || 0) - 650000, 0) -
                       ((deduction?.sum || 0) + 480000),
                       0
@@ -66,7 +66,7 @@ const Tax = ({ sales, cost, deduction1, kyuyo, deduction, user }) => {
                     </>
                   )}
                   {/* <span className="fw-bold text-primary fs-4">合計：</span><span className='fs-4'>{Math.max((sales?.sum || 0) - (cost?.sum || 0) - (deduction1?.sum || 0), 0)}</span> */}
-                  <span className="fw-bold text-primary fs-4">合計：</span><span className='fs-4'>{Math.max((sales || 0) - (cost || 0) - (deduction1?.sum || 0), 0)}</span>
+                  <span className="fw-bold text-primary fs-4">合計：</span><span className='fs-4'>{Math.max((sales || 0) - (cost<0? 0:cost || 0) - (deduction1?.sum || 0), 0)}</span>
                   </p>
               </div>
             </div>

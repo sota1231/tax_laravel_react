@@ -8,6 +8,8 @@ namespace App\Models\Eloquent;
 
 use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Notifications\Notifiable;
 
 /**
  * Class Sorting
@@ -25,6 +27,7 @@ use Illuminate\Database\Eloquent\Model;
  */
 class Sorting extends Model
 {
+	use HasFactory, Notifiable;
 	protected $table = 'sortings';
 	public $timestamps = false;
 
