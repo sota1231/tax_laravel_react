@@ -3,6 +3,7 @@ import { useForm, Link } from '@inertiajs/react';
 import HeaderLayout from '@/Layouts/Header.Layout';
 import FormSelect from '@/Components/FormSelect';
 import FormInputField from '@/Components/FormInputField';
+import FormInputMath from '@/Components/FormInputMath';
 
 const Update = ({ sortings, kari_names }) => {
     const { data, setData, post, processing, errors } = useForm({
@@ -21,7 +22,10 @@ const Update = ({ sortings, kari_names }) => {
         post(route('update'));
     };
 
-    console.log(sortings)
+    const handleInputChange = (name, value) => {
+        setData(name, value);
+        // console.log('Name',name,'Value',value);
+    };
 
     return (
         <HeaderLayout className="bg-success text-bg-success">
@@ -82,12 +86,17 @@ const Update = ({ sortings, kari_names }) => {
                                     {errors.kari_price && <dd className="text-danger">{errors.kari_price}</dd>}
                                 </td>
                                 <td>
-                                    <FormInputField
+                                    {/* <FormInputField
                                         type="number"
                                         name="kari_price"
                                         placeholder="1000"
                                         value={data.kari_price}
                                         onChange={(e) => setData('kari_price', e.target.value)}
+                                    /> */}
+                                    <FormInputMath
+                                        name="kari_price"
+                                        value={data.kari_price}
+                                        onChange={handleInputChange}
                                     />
                                 </td>
                                 <td>
@@ -95,12 +104,17 @@ const Update = ({ sortings, kari_names }) => {
                                     {errors.kashi_price && <dd className="text-danger">{errors.kashi_price}</dd>}
                                 </td>
                                 <td>
-                                    <FormInputField
+                                    {/* <FormInputField
                                         type="number"
                                         name="kashi_price"
                                         placeholder="1000"
                                         value={data.kashi_price}
                                         onChange={(e) => setData('kashi_price', e.target.value)}
+                                    /> */}
+                                    <FormInputMath
+                                        name="kashi_price"
+                                        value={data.kashi_price}
+                                        onChange={handleInputChange}
                                     />
                                 </td>
                             </tr>

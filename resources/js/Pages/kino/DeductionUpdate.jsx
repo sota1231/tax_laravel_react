@@ -3,10 +3,11 @@ import { useForm } from '@inertiajs/react';
 import HeaderLayout from '@/Layouts/Header.Layout';
 import FormSelect from '@/Components/FormSelect';
 import FormInputField from '@/Components/FormInputField';
+import FormInputMath from '@/Components/FormInputMath';
 
 
 const DeductionUpdate = ({ deductions, errors }) => {
-    const { data, setData, post, processing } = useForm({
+    const { data, setData, post, processing, user } = useForm({
         id: deductions.id,
         user_id: deductions.user_id,
         day: deductions.date,
@@ -18,6 +19,11 @@ const DeductionUpdate = ({ deductions, errors }) => {
     const handleSubmit = (e) => {
         e.preventDefault();
         post(route('deduction_update'));
+    };
+
+    const handleInputChange = (name, value) => {
+        setData(name, value);
+        // console.log('Name',name,'Value',value);
     };
 
     return (
@@ -66,6 +72,7 @@ const DeductionUpdate = ({ deductions, errors }) => {
                                 </td>
                                 <td>
                                     <FormSelect
+                                        className='form-control form-control-sm'
                                         name="role"
                                         value={data.role}
                                         onChange={(e) => setData('role', e.target.value)}
@@ -84,12 +91,17 @@ const DeductionUpdate = ({ deductions, errors }) => {
                                     {errors.price && <dd className="text-danger">{errors.price}</dd>}
                                 </td>
                                 <td>
-                                    <FormInputField
+                                    {/* <FormInputField
                                         type="number"
                                         name="price"
                                         placeholder="1000"
                                         value={data.price}
                                         onChange={(e) => setData('price', e.target.value)}
+                                    /> */}
+                                    <FormInputMath
+                                        value={data.price}
+                                        name="price"
+                                        onChange={handleInputChange}
                                     />
                                 </td>
                             </tr>

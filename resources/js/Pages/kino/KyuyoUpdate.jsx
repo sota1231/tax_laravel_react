@@ -2,6 +2,7 @@ import React from 'react';
 import { useForm, Link } from '@inertiajs/react';
 import HeaderLayout from '@/Layouts/Header.Layout';
 import FormInputField from '@/Components/FormInputField';
+import FormInputMath from '@/Components/FormInputMath';
 
 const KyuyoUpdate = ({ kyuyos }) => {
     const { data, setData, post, processing, errors } = useForm({
@@ -16,6 +17,11 @@ const KyuyoUpdate = ({ kyuyos }) => {
     const handleSubmit = (e) => {
         e.preventDefault();
         post(route('kyuyo_update'));
+    };
+
+    const handleInputChange = (name, value) => {
+        setData(name, value);
+        // console.log('Name',name,'Value',value);
     };
 
     return (
@@ -64,12 +70,17 @@ const KyuyoUpdate = ({ kyuyos }) => {
                                     {errors.price && <dd className="text-danger">{errors.price}</dd>}
                                 </td>
                                 <td>
-                                    <FormInputField
+                                    {/* <FormInputField
                                         type="number"
                                         name="price"
                                         placeholder="1000"
                                         value={data.price}
                                         onChange={(e) => setData('price', e.target.value)}
+                                    /> */}
+                                    <FormInputMath
+                                        value={data.price}
+                                        name="price"
+                                        onChange={handleInputChange}
                                     />
                                 </td>
                             </tr>

@@ -176,4 +176,61 @@ class Sorting extends Model
         DB::insert('insert into sortings (kari_name_id,kari_price,kashi_name_id,kashi_price,remarks,day,balance,user_id) 
                     values(:kari_name_id,:kari_price,:kashi_name_id,:kashi_price,:remarks,:day,:balance,:user_id)', $param);
     }
+
+    public function edit($request)
+    {
+        $user = Auth::user();
+        if ($user->role == 1) {
+            $param = [
+                'id' => $request->id,
+                'kari_name_id' => $request->kari_name_id,
+                'kari_price' => $request->kari_price,
+                'kashi_name_id' => $request->kashi_name_id,
+                'kashi_price' => $request->kashi_price,
+                'day' => $request->day,
+                'remarks' => $request->remarks,
+                'user_id' => $request->user_id
+            ];
+    
+            // DB::update('update sortings set 
+            //         kari_name_id =:kari_name_id, 
+            //         kari_price =:kari_price, 
+            //         kashi_name_id =:kashi_name_id,
+            //         kashi_price=:kashi_price,
+            //         day =:day,
+            //         remarks =:remarks,
+            //         user_id =:user_id 
+            //         where id =:id', $param);
+            
+        }else if ($user->role == 2) {
+            $param = [
+                'id' => $request->id,
+                'kari_name_id' => $request->name_id,
+                'kari_price' => $request->price,
+                'kashi_name_id' => $request->name_id,
+                'kashi_price' => $request->price,
+                'day' => $request->day,
+                'remarks' => $request->remarks,
+                'user_id' => $request->user_id
+            ];
+
+        }else {
+            // 404
+        }
+
+        // DB::update('update sortings set 
+        // kari_name_id =:kari_name_id, 
+        // kari_price =:kari_price, 
+        // kashi_name_id =:kashi_name_id,
+        // kashi_price=:kashi_price,
+        // day =:day,
+        // remarks =:remarks,
+        // user_id =:user_id 
+        // where id =:id', $param);
+        
+         // クエリビルダを使用して更新
+    return DB::table('sortings')
+    ->where('id', $request->id)
+    ->update($param);
+    }
 }

@@ -40,9 +40,9 @@ class Sorting extends Model
 
 	protected $fillable = [
 		'user_id',
-		'kari_name',
+		'kari_name_id',
 		'kari_price',
-		'kashi_name',
+		'kashi_name_id',
 		'kashi_price',
 		'remarks',
 		'day'

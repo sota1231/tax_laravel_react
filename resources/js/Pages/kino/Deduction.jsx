@@ -4,6 +4,7 @@ import HeaderLayout from '@/Layouts/Header.Layout';
 import FormSelect from '@/Components/FormSelect';
 import FormInputField from '@/Components/FormInputField';
 import FlashMessage from '@/Components/FlashMessage';
+import FormInputMath from '@/Components/FormInputMath';
 // import { Inertia } from '@inertiajs/inertia';
 
 const Deduction = ({ deductions }) => {
@@ -20,11 +21,16 @@ const Deduction = ({ deductions }) => {
         post(route('deduction'));
     };
 
+    const handleInputChange = (name, value) => {
+        setData(name, value);
+        // console.log('Name',name,'Value',value);
+    };
+
     return (
         <HeaderLayout className="bg-primary text-bg-primary">
             <div className="container p-5">
-            <FlashMessage />
-            <h2>控除登録画面</h2>
+                <FlashMessage />
+                <h2>控除登録画面</h2>
                 <form onSubmit={handleSubmit}>
                     <table className="table">
                         <tbody>
@@ -63,19 +69,19 @@ const Deduction = ({ deductions }) => {
                                     <label htmlFor="role">控除種類</label><span className="required text-danger">*</span>
                                 </td>
                                 <td>
-                                <FormSelect
-                                    className='form-control form-control-sm'
-                                    name="role"
-                                    value={data.role}
-                                    onChange={(e) => setData('role', e.target.value)}
-                                    options={user?.role !== 2 ? [
-                                        { value: "0", label: "通常の控除（社会保険料控除や扶養控除）" }
-                                    ] : [
-                                        { value: "0", label: "通常の控除（社会保険料控除や扶養控除）" },
-                                        { value: "1", label: "事業所得控除（青色申告してる方）" }
-                                    ]}
-                                />
-                                
+                                    <FormSelect
+                                        className='form-control form-control-sm'
+                                        name="role"
+                                        value={data.role}
+                                        onChange={(e) => setData('role', e.target.value)}
+                                        options={user?.role !== 2 ? [
+                                            { value: "0", label: "通常の控除（社会保険料控除や扶養控除）" }
+                                        ] : [
+                                            { value: "0", label: "通常の控除（社会保険料控除や扶養控除）" },
+                                            { value: "1", label: "事業所得控除（青色申告してる方）" }
+                                        ]}
+                                    />
+
                                 </td>
                             </tr>
                             <tr>
@@ -84,16 +90,20 @@ const Deduction = ({ deductions }) => {
                                     {errors.price && <dd className="text-danger">{errors.price}</dd>}
                                 </td>
                                 <td>
-                                    <FormInputField
+                                    {/* <FormInputField
                                         type="number"
                                         name="price"
                                         placeholder="1000"
                                         value={data.price}
                                         onChange={(e) => setData('price', e.target.value)}
+                                    /> */}
+                                    <FormInputMath
+                                        name="price"
+                                        onChange={handleInputChange}
                                     />
                                 </td>
                             </tr>
-                            
+
                         </tbody>
                     </table>
                     <button type="submit" className='btn btn-primary px-4' disabled={processing}>送信</button>

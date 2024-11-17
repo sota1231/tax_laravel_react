@@ -4,6 +4,7 @@ import { useForm, Link } from '@inertiajs/react';
 import HeaderLayout from '@/Layouts/Header.Layout';
 import FormInputField from '@/Components/FormInputField';
 import FlashMessage from '@/Components/FlashMessage';
+import FormInputMath from '@/Components/FormInputMath';
 // import { Inertia } from '@inertiajs/inertia';
 
 const Kyuyo = ({ kyuyos }) => {
@@ -18,6 +19,11 @@ const Kyuyo = ({ kyuyos }) => {
   const handleSubmit = (e) => {
     e.preventDefault();
     post(route('kyuyo'));
+  };
+
+  const handleInputChange = (name, value) => {
+    setData(name, value);
+    // console.log('Name',name,'Value',value);
   };
 
   return (
@@ -63,12 +69,16 @@ const Kyuyo = ({ kyuyos }) => {
                   {errors.price && <dd className="text-danger">{errors.price}</dd>}
                 </td>
                 <td>
-                  <FormInputField
+                  {/* <FormInputField
                     type="number"
                     name="price"
                     placeholder="1000"
                     value={data.price}
                     onChange={(e) => setData('price', e.target.value)}
+                  /> */}
+                  <FormInputMath
+                    name="price"
+                    onChange={handleInputChange}
                   />
                 </td>
               </tr>

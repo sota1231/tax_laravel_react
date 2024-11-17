@@ -1,19 +1,24 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 // import '@/../css/app.css';
 
-const FormInputMath = ({ onChange, name }) => {
-    const [inputValue, setInputValue] = useState('');
+const FormInputMath = ({ onChange, name, value }) => {
+    const [inputValue, setInputValue] = useState(value || '');
     const [showButtons, setShowButtons] = useState(false);
 
     // ボタン押下で数値を追加する関数
     const handleButtonClick = (e, number) => {
         // e.preventDefault(); // フォーム送信を防ぐ
-        const newValue = inputValue + number;
+        const newValue = inputValue +  String(number); //文字列に変換しないと加算される
         setInputValue(newValue);
         if (onChange) {
             onChange(name, newValue); // 外部コンポーネントに入力値を通知
         }
     };
+
+    // valueの監視、更新
+    useEffect(() => {
+        setInputValue( String(value || ''));
+    }, [value]);
 
     // inputが押下されたときにボタン表示を切り替える関数
     const handleInputClick = () => {
