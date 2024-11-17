@@ -9,7 +9,6 @@ import FormInputMath from '@/Components/FormInputMath';
 
 const SimpleUpdate = ({ kari_names, sortings }) => {
     // フィルタリングが適用されたかを追跡する状態
-    const [isFiltered, setIsFiltered] = useState(false);
     const { data, setData, post, processing, errors } = useForm({
         id: sortings.id,
         user_id: sortings.user_id,
@@ -23,11 +22,6 @@ const SimpleUpdate = ({ kari_names, sortings }) => {
 
     // 収入・支出で分類を分けるための関数
     const getFilteredNames = () => {
-        // balanceが変更された時のみフィルタリングを適用
-        // 初期表示時（isFiltered = false）は全ての分類を返す
-        if (!isFiltered) {
-            return kari_names;
-        }
         // data.balanceが0（収入）の時はleft=1のデータ
         // data.balanceが1（支出）の時はleft=0のデータ
         // return kari_names.filter(name =>
@@ -35,17 +29,16 @@ const SimpleUpdate = ({ kari_names, sortings }) => {
         // );
         const filteredResults = kari_names.filter(name => {
             const shouldInclude = name.left === (data.balance === 0 ? 1 : 0);
-            console.log(`name: ${name.name}, left: ${name.left}, include: ${shouldInclude}`);
+            // console.log(`name: ${name.name}, left: ${name.left}, include: ${shouldInclude}`);
             return shouldInclude;
         });
 
-        console.log('Filtered results:', filteredResults);
+        // console.log('Filtered results:', filteredResults);
         return filteredResults;
     };
 
     // balanceが変更された時にname_idをリセット
     const handleBalanceChange = (value) => {
-        setIsFiltered(true); // フィルタリングフラグを立てる
         setData(data => ({
             ...data,           // 1. 既存のデータを展開
             balance: value,    // 2. balanceを更新
