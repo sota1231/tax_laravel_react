@@ -4,22 +4,28 @@ import HeaderLayout from '@/Layouts/Header.Layout';
 import FormSelect from '@/Components/FormSelect';
 import FormInputField from '@/Components/FormInputField';
 import FlashMessage from '@/Components/FlashMessage';
+import FormInputMath from '@/Components/FormInputMath';
 
 
 const Index = ({ kari_names, sortings }) => {
     const { data, setData, post, processing, errors } = useForm({
-        day:             '',
-        kari_name_id:    '',
-        kari_price:      '',
-        kashi_name_id:   '',
-        kashi_price:     '',
-        remarks:         '',
+        day: '',
+        kari_name_id: '',
+        kari_price: '',
+        kashi_name_id: '',
+        kashi_price: '',
+        remarks: '',
 
     });
 
     const handleSubmit = (e) => {
         e.preventDefault();
         post(route('sorting'));
+    };
+
+    const handleInputChange = (name, value) => {
+        setData(name, value);
+        // console.log('Name',name,'Value',value);
     };
 
     return (
@@ -54,7 +60,7 @@ const Index = ({ kari_names, sortings }) => {
                                 </td>
                                 <td>
                                     <FormSelect
-                                    className='form-control form-control-sm'
+                                        className='form-control form-control-sm'
                                         name="kari_name_id"
                                         value={data.kari_name_id}
                                         onChange={(e) => setData('kari_name_id', e.target.value)}
@@ -68,7 +74,7 @@ const Index = ({ kari_names, sortings }) => {
                                 </td>
                                 <td>
                                     <FormSelect
-                                    className='form-control form-control-sm'
+                                        className='form-control form-control-sm'
                                         name="kashi_name_id"
                                         value={data.kashi_name_id}
                                         onChange={(e) => setData('kashi_name_id', e.target.value)}
@@ -82,12 +88,16 @@ const Index = ({ kari_names, sortings }) => {
                                     {errors.kari_price && <dd className="text-danger">{errors.kari_price}</dd>}
                                 </td>
                                 <td>
-                                    <FormInputField
+                                    {/* <FormInputField
                                         type="number"
                                         name="kari_price"
                                         placeholder="1000"
                                         value={data.kari_price}
                                         onChange={(e) => setData('kari_price', e.target.value)}
+                                    /> */}
+                                    <FormInputMath
+                                        name="kari_price"
+                                        onChange={handleInputChange}
                                     />
                                 </td>
                                 <td>
@@ -95,12 +105,16 @@ const Index = ({ kari_names, sortings }) => {
                                     {errors.kashi_price && <dd className="text-danger">{errors.kashi_price}</dd>}
                                 </td>
                                 <td>
-                                    <FormInputField
+                                    {/* <FormInputField
                                         type="number"
                                         name="kashi_price"
                                         placeholder="1000"
                                         value={data.kashi_price}
                                         onChange={(e) => setData('kashi_price', e.target.value)}
+                                    /> */}
+                                    <FormInputMath
+                                        name="kashi_price"
+                                        onChange={handleInputChange}
                                     />
                                 </td>
                             </tr>

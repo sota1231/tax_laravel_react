@@ -19,4 +19,9 @@ export default defineConfig({
         port:5175,
         strictPort: true  // ポートが使用中の場合に別のポートを試行せずエラーを出す
     },
+    resolve: {
+        alias: {
+            // '@': '/resources',
+        },
+    },
 });

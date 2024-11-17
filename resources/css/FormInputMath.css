@@ -1,0 +1,6 @@
+.button{
+    width: 20px; 
+    margin: 2px; 
+    border:outset 1px rgb(203, 202, 202);
+    border-radius: 5px;
+}
