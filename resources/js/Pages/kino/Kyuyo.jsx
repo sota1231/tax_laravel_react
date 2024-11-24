@@ -33,13 +33,20 @@ const Kyuyo = ({ kyuyos }) => {
         <h2>給与所得入力</h2>
         <form onSubmit={handleSubmit}>
           <table className="table">
+            <colgroup>
+              <col style={{ width: '15vw' }} />
+              <col style={{ width: '20vw' }} />
+              <col style={{ width: '65vw' }} />
+              {/* <col style={{ width: '35vw' }} /> */}
+            </colgroup>
             <tbody>
               <tr>
                 <td>
                   <label htmlFor="day">取引日時</label><span className="required text-danger">*</span>
-                  {errors.day && <dd className="text-danger">{errors.day}</dd>}
                 </td>
+                <td></td>
                 <td>
+                  {errors.day && <dd className="text-danger">{errors.day}</dd>}
                   <FormInputField
                     type="date"
                     name="day"
@@ -52,9 +59,10 @@ const Kyuyo = ({ kyuyos }) => {
               <tr>
                 <td>
                   <label htmlFor="name">勤め先</label><span className="required text-danger">*</span>
-                  {errors.name && <dd className="text-danger">{errors.name}</dd>}
                 </td>
+                <td></td>
                 <td>
+                  {errors.name && <dd className="text-danger">{errors.name}</dd>}
                   <FormInputField
                     type="text"
                     name="name"
@@ -66,8 +74,8 @@ const Kyuyo = ({ kyuyos }) => {
               <tr>
                 <td>
                   <label htmlFor="price">手取り金額</label><span className="required text-danger">*</span>
-                  {errors.price && <dd className="text-danger">{errors.price}</dd>}
                 </td>
+                <td></td>
                 <td>
                   {/* <FormInputField
                     type="number"
@@ -76,6 +84,7 @@ const Kyuyo = ({ kyuyos }) => {
                     value={data.price}
                     onChange={(e) => setData('price', e.target.value)}
                   /> */}
+                  {errors.price && <dd className="text-danger">{errors.price}</dd>}
                   <FormInputMath
                     name="price"
                     onChange={handleInputChange}
@@ -85,9 +94,10 @@ const Kyuyo = ({ kyuyos }) => {
               <tr>
                 <td>
                   <label htmlFor="remarks">備考</label><span className="required text-danger">*</span>
-                  {errors.remarks && <dd className="text-danger">{errors.remarks}</dd>}
                 </td>
+                <td></td>
                 <td>
+                  {errors.remarks && <dd className="text-danger">{errors.remarks}</dd>}
                   <FormInputField
                     type="text"
                     name="remarks"
@@ -117,6 +127,14 @@ const Kyuyo = ({ kyuyos }) => {
         </div>
         <div className="table-responsive">
           <table className="table table-striped table-sm">
+            <colgroup>
+              <col style={{ width: '10vw' }} />
+              <col style={{ width: '15vw' }} />
+              <col style={{ width: '10vw' }} />
+              <col style={{ width: '45vw' }} />
+              <col style={{ width: '10vw' }} />
+              <col style={{ width: '10vw' }} />
+            </colgroup>
             <thead>
               <tr>
                 <th className='bg-success-subtle'>取引日時</th>
@@ -129,9 +147,9 @@ const Kyuyo = ({ kyuyos }) => {
               {kyuyos.data.map((kyuyo, index) => (
                 <tr key={index}>
                   <td>{kyuyo.date}</td>
-                  <td>{kyuyo.name.length > 10 ? `${kyuyo.name.slice(0, 10)}...` : kyuyo.name}</td>
+                  <td>{kyuyo.name.length > 15 ? `${kyuyo.name.slice(0, 15)}...` : kyuyo.name}</td>
                   <td>{kyuyo.price}円</td>
-                  <td>{kyuyo.remarks.length > 10 ? `${kyuyo.remarks.slice(0, 10)}...` : kyuyo.remarks}</td>
+                  <td>{kyuyo.remarks.length > 20 ? `${kyuyo.remarks.slice(0, 20)}...` : kyuyo.remarks}</td>
                   <td><Link href={route('kyuyo_edit', { id: kyuyo.id })} className='btn btn-success btn-sm'>更新</Link></td>
                   <td><Link
                     href={route('kyuyo_delete', { id: kyuyo.id })}

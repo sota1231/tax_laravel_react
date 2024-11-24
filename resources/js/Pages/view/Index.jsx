@@ -37,13 +37,19 @@ const Index = ({ kari_names, sortings }) => {
                 <form onSubmit={handleSubmit}>
 
                     <table className="table">
+                        <colgroup>
+                            <col style={{ width: '15vw' }} />
+                            <col style={{ width: '35vw' }} />
+                            <col style={{ width: '15vw' }} />
+                            <col style={{ width: '35vw' }} />
+                        </colgroup>
                         <tbody>
                             <tr>
                                 <td>
                                     <label htmlFor="day">取引日時</label><span className="required text-danger">*</span>
-                                    {errors.day && <dd className="text-danger">{errors.day}</dd>}
                                 </td>
                                 <td>
+                                    {errors.day && <dd className="text-danger">{errors.day}</dd>}
                                     <FormInputField
                                         type="date"
                                         name="day"
@@ -56,9 +62,9 @@ const Index = ({ kari_names, sortings }) => {
                             <tr>
                                 <td>
                                     <label htmlFor="kari_name_id">借方名</label><span className="required text-danger">* </span>
-                                    {errors.kari_name_id && <dd className="text-danger">{errors.kari_name_id}</dd>}
                                 </td>
                                 <td>
+                                    {errors.kari_name_id && <dd className="text-danger">{errors.kari_name_id}</dd>}
                                     <FormSelect
                                         className='form-control form-control-sm'
                                         name="kari_name_id"
@@ -70,9 +76,9 @@ const Index = ({ kari_names, sortings }) => {
                                 </td>
                                 <td>
                                     <label htmlFor="kashi_name">貸方名</label><span className="required text-danger">* </span>
-                                    {errors.kashi_name_id && <dd className="text-danger">{errors.kashi_name_id}</dd>}
                                 </td>
                                 <td>
+                                    {errors.kashi_name_id && <dd className="text-danger">{errors.kashi_name_id}</dd>}
                                     <FormSelect
                                         className='form-control form-control-sm'
                                         name="kashi_name_id"
@@ -85,7 +91,6 @@ const Index = ({ kari_names, sortings }) => {
                             <tr>
                                 <td>
                                     <label htmlFor="kari_price">借方金額</label><span className="required text-danger">*</span>
-                                    {errors.kari_price && <dd className="text-danger">{errors.kari_price}</dd>}
                                 </td>
                                 <td>
                                     {/* <FormInputField
@@ -95,6 +100,7 @@ const Index = ({ kari_names, sortings }) => {
                                         value={data.kari_price}
                                         onChange={(e) => setData('kari_price', e.target.value)}
                                     /> */}
+                                    {errors.kari_price && <dd className="text-danger">{errors.kari_price}</dd>}
                                     <FormInputMath
                                         name="kari_price"
                                         onChange={handleInputChange}
@@ -102,7 +108,6 @@ const Index = ({ kari_names, sortings }) => {
                                 </td>
                                 <td>
                                     <label htmlFor="kashi_price">貸方金額</label><span className="required text-danger">*</span>
-                                    {errors.kashi_price && <dd className="text-danger">{errors.kashi_price}</dd>}
                                 </td>
                                 <td>
                                     {/* <FormInputField
@@ -112,6 +117,7 @@ const Index = ({ kari_names, sortings }) => {
                                         value={data.kashi_price}
                                         onChange={(e) => setData('kashi_price', e.target.value)}
                                     /> */}
+                                    {errors.kashi_price && <dd className="text-danger">{errors.kashi_price}</dd>}
                                     <FormInputMath
                                         name="kashi_price"
                                         onChange={handleInputChange}
@@ -120,9 +126,9 @@ const Index = ({ kari_names, sortings }) => {
                             </tr>
                             <tr>
                                 <td><label htmlFor="remarks">備考</label><span className="required text-danger">*</span>
-                                    {errors.remarks && <dd className="text-danger">{errors.remarks}</dd>}
                                 </td>
                                 <td>
+                                    {errors.remarks && <dd className="text-danger">{errors.remarks}</dd>}
                                     <FormInputField
                                         type="text"
                                         name="remarks"
@@ -163,30 +169,43 @@ const Index = ({ kari_names, sortings }) => {
                             />
                         ))}
                     </div>
+
                     <table className="table table-striped table-sm">
+                        <colgroup>
+                            {/* <col style={{ width: '2vw' }} /> */}
+                            <col style={{ width: '10vw' }} />
+                            <col style={{ width: '10vw' }} />
+                            <col style={{ width: '10vw' }} />
+                            <col style={{ width: '10vw' }} />
+                            <col style={{ width: '10vw' }} />
+                            <col style={{ width: '40vw' }} />
+                            <col style={{ width: '5vw' }} />
+                            <col style={{ width: '5vw' }} />
+                        </colgroup>
                         <thead>
                             <tr>
-                                <th className='bg-success-subtle'>ID</th>
-                                <th className='bg-success-subtle'>日付</th>
+                                {/* <th className='bg-success-subtle'>ID</th> */}
+                                <th className='bg-secondary-subtle'>日付</th>
                                 <th className='bg-success-subtle'>借方名</th>
                                 <th className='bg-success-subtle'>借方金額</th>
                                 <th className='bg-danger-subtle'>貸方名</th>
                                 <th className='bg-danger-subtle'>貸方金額</th>
-                                <th className='bg-danger-subtle'>備考</th>
-                                <th></th>
-                                <th></th>
+                                <th className='bg-secondary-subtle'>備考</th>
+                                <th className='bg-secondary-subtle'></th>
+                                <th className='bg-secondary-subtle'></th>
                             </tr>
                         </thead>
                         <tbody>
+                            <tr style={{ display: 'none' }}></tr>
                             {sortings.data.map((sorting, index) => (
                                 <tr key={index}>
-                                    <td>{index + 1}</td>
+                                    {/* <td>{index + 1}</td> */}
                                     <td>{sorting.date}</td>
                                     <td>{kari_names.find(name => name.id === sorting.kari_name_id)?.name}</td>
                                     <td>{sorting.kari_price}</td>
                                     <td>{kari_names.find(name => name.id === sorting.kashi_name_id)?.name}</td>
                                     <td>{sorting.kashi_price}</td>
-                                    <td>{sorting.remarks.length > 10 ? `${sorting.remarks.slice(0, 10)}...` : sorting.remarks}</td>
+                                    <td>{sorting.remarks.length > 20 ? `${sorting.remarks.slice(0, 20)}...` : sorting.remarks}</td>
                                     <td><Link href={route('edit', { id: sorting.id })} className='btn btn-success btn-sm'>更新</Link></td>
                                     <td><Link
                                         href={route('delete', { id: sorting.id })}

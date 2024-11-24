@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use App\Http\Requests\SortingRequest;
 use Illuminate\Support\Facades\DB;
 use App\Models\Services\KariName;
+use App\Models\Eloquent\KariName as EloquentKariName;
 use App\Models\Services\Sorting;
 use Illuminate\Support\Facades\Auth;
 use App\Models\Services\Kyuyo;
@@ -14,6 +15,7 @@ use App\Http\Requests\DeductionRequest;
 use App\Http\Requests\KyuyoRequest;
 use Illuminate\Support\Facades\Redirect;
 use Inertia\Inertia;
+use Illuminate\Support\Facades\Log;
 
 class SortingContoroller extends Controller
 {
@@ -79,6 +81,49 @@ class SortingContoroller extends Controller
         return Redirect::route('index')->with('message', '仕分けが正常に登録されました。');
     }
 
+    // csv
+    public function csv()
+    {
+        // Log::info('Excel CSV download started');
+        $user = Auth::user();
+        $sorting = new Sorting();
+        $data = $sorting->csv($user->id);
+        $kari = new KariName();
+        $kari_names = $kari->kari();
+
+        $output = '';
+        // BOMを追加してExcelで文字化けを防ぐ
+        $output = "\xEF\xBB\xBF";
+
+        // ヘッダー行を追加
+        $headers = ["日付", "借方科目", "借方金額", "貸方科目", "貸方金額", "備考"];
+        $output .= implode(",", $headers) . "\r\n";
+
+        // データ行を追加
+        foreach ($data as $row) {
+            $line = [
+                $row->date,
+                // KariName::find($row->kari_name_id),
+                EloquentKariName::find($row->kari_name_id)->name,
+                $row->kari_price,
+                EloquentKariName::find($row->kashi_name_id)->name,
+                $row->kashi_price,
+                $row->remarks
+            ];
+            // 各フィールドをダブルクォートで囲む
+            $line = array_map(function ($field) {
+                return '"' . str_replace('"', '""', $field) . '"';
+            }, $line);
+            $output .= implode(",", $line) . "\r\n";
+        }
+
+        return response($output)
+            ->header('Content-Type', 'application/vnd.ms-excel')
+            ->header('Content-Disposition', 'attachment; filename="data.xls"')
+            ->header('Cache-Control', 'max-age=0');
+    }
+
+
     // 控除登録画面 ====================================
     public function deduction()
     {
@@ -132,13 +177,13 @@ class SortingContoroller extends Controller
             // 売上げ合計
             $sales_kari  = $sorting->sumKarisales($id);   // 借方の売上げ合計
             $sales_kashi = $sorting->sumKashiSales($id);  // 貸方の売上げ合計
-            $sales = ($sales_kashi? $sales_kashi->sumKashi : 0) - ($sales_kari? $sales_kari->sumKari : 0);
+            $sales = ($sales_kashi ? $sales_kashi->sumKashi : 0) - ($sales_kari ? $sales_kari->sumKari : 0);
             // 経費合計
             $cost_kari  = $sorting->sumKariCost($id);   // 借方の経費合計
             $cost_kashi = $sorting->sumKashiCost($id);  // 貸方の経費合計
-            $cost = ($cost_kari? $cost_kari->sumKari : 0) - ($cost_kashi? $cost_kashi->sumKashi : 0);
-        
-        // 簡易簿記ユーザーの事業所得の計算
+            $cost = ($cost_kari ? $cost_kari->sumKari : 0) - ($cost_kashi ? $cost_kashi->sumKashi : 0);
+
+            // 簡易簿記ユーザーの事業所得の計算
         } else if ($user->role == 2) {
             $sales_sum = $sorting->sumSales($id); // 売上げの合計
             $sales = $sales_sum->sum;

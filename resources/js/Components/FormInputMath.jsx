@@ -22,8 +22,20 @@ const FormInputMath = ({ onChange, name, value }) => {
 
     // inputが押下されたときにボタン表示を切り替える関数
     const handleInputClick = () => {
-        setShowButtons(!showButtons);
+        setShowButtons(true);
     };
+
+    // 数字ボタン以外をクリックしたら非表示にする
+    useEffect(() => {
+        const handleClickOutside = (e) => {
+            if (!e.target.closest('.button') && !e.target.closest('input')) {
+                setShowButtons(false);
+            }
+        };
+
+        document.addEventListener('click', handleClickOutside);
+        return () => document.removeEventListener('click', handleClickOutside);
+    }, []);
 
     // キーボード入力を処理する関数を追加
     const handleInputChange = (e) => {

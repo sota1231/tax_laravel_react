@@ -1,0 +1,13 @@
+/* .bg-primar{ */
+    /* background: linear-gradient(rgb(10, 98, 250), rgb(100, 152, 242)); */
+    /* background: linear-gradient(rgb(10, 98, 250), rgb(100, 152, 242)); */
+    /* background-color: rgb(57, 119, 225); */
+    /* background-color: aqua; */
+/* } */
+.title {
+    color: white;
+    font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+}
+.nav-item .nav-link{
+    color: white;
+}

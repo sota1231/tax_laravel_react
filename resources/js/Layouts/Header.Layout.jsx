@@ -1,5 +1,6 @@
 import React from 'react';
 import { Link } from '@inertiajs/react';
+import "./Header.Layout.css";
 
 const HeaderLayout = ({ children,className }) => {
   return (

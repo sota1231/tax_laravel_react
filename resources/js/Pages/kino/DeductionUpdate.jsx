@@ -35,13 +35,20 @@ const DeductionUpdate = ({ deductions, errors }) => {
                     <input type="hidden" name="user_id" value={data.user_id} />
 
                     <table className="table">
+                        <colgroup>
+                            <col style={{ width: '15vw' }} />
+                            <col style={{ width: '20vw' }} />
+                            <col style={{ width: '65vw' }} />
+                            {/* <col style={{ width: '35vw' }} /> */}
+                        </colgroup>
                         <tbody>
                             <tr>
                                 <td>
                                     <label htmlFor="day">取引日時</label><span className="required text-danger">*</span>
-                                    {errors.day && <dd className="text-danger">{errors.day}</dd>}
                                 </td>
+                                <td></td>
                                 <td>
+                                    {errors.day && <dd className="text-danger">{errors.day}</dd>}
                                     <FormInputField
                                         type="date"
                                         name="day"
@@ -54,9 +61,10 @@ const DeductionUpdate = ({ deductions, errors }) => {
                             <tr>
                                 <td>
                                     <label htmlFor="remarks">控除名</label><span className="required text-danger">*</span>
-                                    {errors.remarks && <dd className="text-danger">{errors.remarks}</dd>}
                                 </td>
+                                <td></td>
                                 <td>
+                                    {errors.remarks && <dd className="text-danger">{errors.remarks}</dd>}
                                     <FormInputField
                                         type="text"
                                         name="remarks"
@@ -70,7 +78,9 @@ const DeductionUpdate = ({ deductions, errors }) => {
                                 <td>
                                     <label htmlFor="role">控除種類</label><span className="required text-danger">*</span>
                                 </td>
+                                <td></td>
                                 <td>
+                                    {errors.role && <dd className="text-danger">{errors.role}</dd>}
                                     <FormSelect
                                         className='form-control form-control-sm'
                                         name="role"
@@ -88,8 +98,8 @@ const DeductionUpdate = ({ deductions, errors }) => {
                             <tr>
                                 <td>
                                     <label htmlFor="price">金額</label><span className="required text-danger">*</span>
-                                    {errors.price && <dd className="text-danger">{errors.price}</dd>}
                                 </td>
+                                <td></td>
                                 <td>
                                     {/* <FormInputField
                                         type="number"
@@ -98,6 +108,7 @@ const DeductionUpdate = ({ deductions, errors }) => {
                                         value={data.price}
                                         onChange={(e) => setData('price', e.target.value)}
                                     /> */}
+                                    {errors.price && <dd className="text-danger">{errors.price}</dd>}
                                     <FormInputMath
                                         value={data.price}
                                         name="price"
@@ -105,7 +116,7 @@ const DeductionUpdate = ({ deductions, errors }) => {
                                     />
                                 </td>
                             </tr>
-                            
+
                         </tbody>
                     </table>
                     <button className="btn btn-success px-4" type="submit" disabled={processing}>編集</button>

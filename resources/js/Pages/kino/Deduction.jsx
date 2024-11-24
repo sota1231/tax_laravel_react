@@ -33,13 +33,20 @@ const Deduction = ({ deductions }) => {
                 <h2>控除登録画面</h2>
                 <form onSubmit={handleSubmit}>
                     <table className="table">
+                        <colgroup>
+                            <col style={{ width: '15vw' }} />
+                            <col style={{ width: '20vw' }} />
+                            <col style={{ width: '65vw' }} />
+                            {/* <col style={{ width: '35vw' }} /> */}
+                        </colgroup>
                         <tbody>
                             <tr>
                                 <td>
                                     <label htmlFor="day">取引日時</label><span className="required text-danger">*</span>
-                                    {errors.day && <dd className="text-danger">{errors.day}</dd>}
                                 </td>
+                                <td></td>
                                 <td>
+                                    {errors.day && <dd className="text-danger">{errors.day}</dd>}
                                     <FormInputField
                                         type="date"
                                         name="day"
@@ -52,9 +59,10 @@ const Deduction = ({ deductions }) => {
                             <tr>
                                 <td>
                                     <label htmlFor="remarks">控除名</label><span className="required text-danger">*</span>
-                                    {errors.remarks && <dd className="text-danger">{errors.remarks}</dd>}
                                 </td>
+                                <td></td>
                                 <td>
+                                    {errors.remarks && <dd className="text-danger">{errors.remarks}</dd>}
                                     <FormInputField
                                         type="text"
                                         name="remarks"
@@ -68,7 +76,9 @@ const Deduction = ({ deductions }) => {
                                 <td>
                                     <label htmlFor="role">控除種類</label><span className="required text-danger">*</span>
                                 </td>
+                                <td></td>
                                 <td>
+                                    {errors.role && <dd className="text-danger">{errors.role}</dd>}
                                     <FormSelect
                                         className='form-control form-control-sm'
                                         name="role"
@@ -87,8 +97,8 @@ const Deduction = ({ deductions }) => {
                             <tr>
                                 <td>
                                     <label htmlFor="price">金額</label><span className="required text-danger">*</span>
-                                    {errors.price && <dd className="text-danger">{errors.price}</dd>}
                                 </td>
+                                <td></td>
                                 <td>
                                     {/* <FormInputField
                                         type="number"
@@ -97,6 +107,7 @@ const Deduction = ({ deductions }) => {
                                         value={data.price}
                                         onChange={(e) => setData('price', e.target.value)}
                                     /> */}
+                                    {errors.price && <dd className="text-danger">{errors.price}</dd>}
                                     <FormInputMath
                                         name="price"
                                         onChange={handleInputChange}
@@ -123,6 +134,14 @@ const Deduction = ({ deductions }) => {
                         ))}
                     </div>
                     <table className="table table-striped table-sm">
+                        <colgroup>
+                            <col style={{ width: '10vw' }} />
+                            <col style={{ width: '40vw' }} />
+                            <col style={{ width: '15vw' }} />
+                            <col style={{ width: '15vw' }} />
+                            <col style={{ width: '10vw' }} />
+                            <col style={{ width: '10vw' }} />
+                        </colgroup>
                         <thead>
                             <tr>
                                 <th className='bg-success-subtle'>日付</th>

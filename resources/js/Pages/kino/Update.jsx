@@ -36,13 +36,19 @@ const Update = ({ sortings, kari_names }) => {
                     <input type="hidden" name="user_id" value={data.user_id} />
 
                     <table className="table">
+                        <colgroup>
+                            <col style={{ width: '15vw' }} />
+                            <col style={{ width: '35vw' }} />
+                            <col style={{ width: '15vw' }} />
+                            <col style={{ width: '35vw' }} />
+                        </colgroup>
                         <tbody>
                             <tr>
                                 <td>
                                     <label htmlFor="day">取引日時</label><span className="required text-danger">*</span>
-                                    {errors.day && <dd className="text-danger">{errors.day}</dd>}
                                 </td>
                                 <td>
+                                    {errors.day && <dd className="text-danger">{errors.day}</dd>}
                                     <FormInputField
                                         type="date"
                                         name="day"
@@ -55,9 +61,9 @@ const Update = ({ sortings, kari_names }) => {
                             <tr>
                                 <td>
                                     <label htmlFor="kari_name_id">借方名</label><span className="required text-danger">* </span>
-                                    {errors.kari_name_id && <dd className="text-danger">{errors.kari_name_id}</dd>}
                                 </td>
                                 <td>
+                                    {errors.kari_name_id && <dd className="text-danger">{errors.kari_name_id}</dd>}
                                     <FormSelect
                                         className='form-control form-control-sm'
                                         name="kari_name_id"
@@ -68,9 +74,9 @@ const Update = ({ sortings, kari_names }) => {
                                 </td>
                                 <td>
                                     <label htmlFor="kashi_name">貸方名</label><span className="required text-danger">* </span>
-                                    {errors.kashi_name && <dd className="text-danger">{errors.kashi_name}</dd>}
                                 </td>
                                 <td>
+                                    {errors.kashi_name && <dd className="text-danger">{errors.kashi_name}</dd>}
                                     <FormSelect
                                         className='form-control form-control-sm'
                                         name="kashi_name_id"
@@ -83,7 +89,6 @@ const Update = ({ sortings, kari_names }) => {
                             <tr>
                                 <td>
                                     <label htmlFor="kari_price">借方金額</label><span className="required text-danger">*</span>
-                                    {errors.kari_price && <dd className="text-danger">{errors.kari_price}</dd>}
                                 </td>
                                 <td>
                                     {/* <FormInputField
@@ -93,6 +98,7 @@ const Update = ({ sortings, kari_names }) => {
                                         value={data.kari_price}
                                         onChange={(e) => setData('kari_price', e.target.value)}
                                     /> */}
+                                    {errors.kari_price && <dd className="text-danger">{errors.kari_price}</dd>}
                                     <FormInputMath
                                         name="kari_price"
                                         value={data.kari_price}
@@ -101,7 +107,6 @@ const Update = ({ sortings, kari_names }) => {
                                 </td>
                                 <td>
                                     <label htmlFor="kashi_price">貸方金額</label><span className="required text-danger">*</span>
-                                    {errors.kashi_price && <dd className="text-danger">{errors.kashi_price}</dd>}
                                 </td>
                                 <td>
                                     {/* <FormInputField
@@ -111,6 +116,7 @@ const Update = ({ sortings, kari_names }) => {
                                         value={data.kashi_price}
                                         onChange={(e) => setData('kashi_price', e.target.value)}
                                     /> */}
+                                    {errors.kashi_price && <dd className="text-danger">{errors.kashi_price}</dd>}
                                     <FormInputMath
                                         name="kashi_price"
                                         value={data.kashi_price}
@@ -120,9 +126,9 @@ const Update = ({ sortings, kari_names }) => {
                             </tr>
                             <tr>
                                 <td><label htmlFor="remarks">備考</label><span className="required text-danger">*</span>
-                                    {errors.remarks && <dd className="text-danger">{errors.remarks}</dd>}
                                 </td>
                                 <td>
+                                    {errors.remarks && <dd className="text-danger">{errors.remarks}</dd>}
                                     <FormInputField
                                         type="text"
                                         name="remarks"

@@ -56,6 +56,11 @@ Route::post('/kaji_update', [UpdateDeleteController::class, 'kaji_update'])->nam
 // ユーザー削除
 Route::get('/user_delete', [UpdateDeleteController::class, 'user_delete'])->name('user_delete');
 
+
+// csv
+Route::get('/csv', [SortingContoroller::class, 'csv'])->name('csv');
+
+
 // Route::get('/dashboard', function () {
 //     return Inertia::render('Dashboard');
 // })->middleware(['auth', 'verified'])->name('dashboard');

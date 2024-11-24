@@ -227,10 +227,20 @@ class Sorting extends Model
         // remarks =:remarks,
         // user_id =:user_id 
         // where id =:id', $param);
-        
+
          // クエリビルダを使用して更新
     return DB::table('sortings')
     ->where('id', $request->id)
     ->update($param);
+    }
+
+    public function csv($id)
+    {
+        return DB::table('sortings')
+            ->select('*')
+            ->selectRaw('DATE_FORMAT(day,"%Y-%m-%d") as date')
+            ->where('user_id', $id)
+            ->orderBy('day', 'DESC')
+            ->get();
     }
 }

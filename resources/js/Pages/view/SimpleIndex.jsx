@@ -10,7 +10,7 @@ import FormInputMath from '@/Components/FormInputMath';
 const SimpleIndex = ({ kari_names, sortings }) => {
     const { data, setData, post, processing, errors } = useForm({
         day: '',
-        balance:'',
+        balance: '',
         name_id: '',
         price: '',
         remarks: '',
@@ -19,10 +19,10 @@ const SimpleIndex = ({ kari_names, sortings }) => {
     // 収入・支出で分類を分けるための関数
     const getFilteredNames = () => {
         if (data.balance === '') return [];
-        
+
         // data.balanceが0（収入）の時はleft=1のデータ
         // data.balanceが1（支出）の時はleft=0のデータ
-        return kari_names.filter(name => 
+        return kari_names.filter(name =>
             name.left === (data.balance === 0 ? 1 : 0)
         );
     };
@@ -53,23 +53,23 @@ const SimpleIndex = ({ kari_names, sortings }) => {
                 <FlashMessage />
                 <h2>簡易簿記</h2>
                 <form onSubmit={handleSubmit}>
-                    
+
                     <div className="btn-group mb-3 center" role="group">
-                        <button 
-                            type="button" 
+                        <button
+                            type="button"
                             className={`text-bold btn ${data.balance === 0 ? 'btn-warning' : 'btn-outline-warning'}`}
-                            onClick={() =>  handleBalanceChange(0)}
+                            onClick={() => handleBalanceChange(0)}
                         >
                             収入
                         </button>
-                        <button 
-                            type="button" 
+                        <button
+                            type="button"
                             className={`btn ${data.balance === 1 ? 'btn-warning' : 'btn-outline-warning'}`}
                             onClick={() => setData('balance', 1)}
                         >
                             支出
                         </button>
-                        
+
                     </div>
                     {/* <span className="text-danger">　　← 最初に選択してください</span> */}
                     {errors.balance && <div className="text-danger mb-3">{errors.balance}</div>}
@@ -171,6 +171,12 @@ const SimpleIndex = ({ kari_names, sortings }) => {
                             />
                         ))}
                     </div>
+                    <a
+                        href={route('csv')}
+                        target="_blank" rel="noopener noreferrer"
+                    >
+                        csv出力
+                    </a>
                     <table className="table table-striped table-sm">
                         <thead>
                             <tr>
